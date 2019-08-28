@@ -177,6 +177,10 @@
     <Compile Include="Migrations\201908280544365_Initial.Designer.cs">
       <DependentUpon>201908280544365_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908280551045_InitialModalAdded.cs" />
+    <Compile Include="Migrations\201908280551045_InitialModalAdded.Designer.cs">
+      <DependentUpon>201908280551045_InitialModalAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -260,6 +264,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201908280544365_Initial.resx">
       <DependentUpon>201908280544365_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908280551045_InitialModalAdded.resx">
+      <DependentUpon>201908280551045_InitialModalAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
