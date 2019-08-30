@@ -173,6 +173,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RoleManagement.cs" />
     <Compile Include="Helpers\UserManagement.cs" />
     <Compile Include="Migrations\201908280544365_Initial.cs" />
     <Compile Include="Migrations\201908280544365_Initial.Designer.cs">
@@ -181,6 +182,10 @@
     <Compile Include="Migrations\201908280551045_InitialModalAdded.cs" />
     <Compile Include="Migrations\201908280551045_InitialModalAdded.Designer.cs">
       <DependentUpon>201908280551045_InitialModalAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908300456174_SeedingCreatedRoles.cs" />
+    <Compile Include="Migrations\201908300456174_SeedingCreatedRoles.Designer.cs">
+      <DependentUpon>201908300456174_SeedingCreatedRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -268,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908280551045_InitialModalAdded.resx">
       <DependentUpon>201908280551045_InitialModalAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908300456174_SeedingCreatedRoles.resx">
+      <DependentUpon>201908300456174_SeedingCreatedRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
