@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Project_Management.Helpers;
 using Project_Management.Models;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Project_Management.Controllers
@@ -35,6 +36,11 @@ namespace Project_Management.Controllers
         return HttpNotFound();
       }
       return View();
+    }
+    [Authorize(Roles = "ProjectManager,Developer")]
+    public ActionResult List()
+    {
+      return View(db.Projects.ToList());
     }
   }
 }
