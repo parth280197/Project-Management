@@ -20,7 +20,7 @@ namespace Project_Management.Controllers
     [HttpGet]
     public ActionResult Create()
     {
-      return View();
+      return View("ProjectForm");
     }
     [HttpPost]
     public ActionResult Create(Project project)
@@ -35,7 +35,7 @@ namespace Project_Management.Controllers
       {
         return HttpNotFound();
       }
-      return View();
+      return View("List");
     }
     [Authorize(Roles = "ProjectManager,Developer")]
     public ActionResult List()
