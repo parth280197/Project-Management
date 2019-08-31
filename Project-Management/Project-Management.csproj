@@ -171,11 +171,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ProjectManagement.cs" />
     <Compile Include="Helpers\RoleManagement.cs" />
+    <Compile Include="Helpers\TasksManagement.cs" />
     <Compile Include="Helpers\UserManagement.cs" />
     <Compile Include="Migrations\201908280544365_Initial.cs" />
     <Compile Include="Migrations\201908280544365_Initial.Designer.cs">
@@ -195,6 +197,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\UserTaskViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -254,6 +257,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Projects\ProjectForm.cshtml" />
     <Content Include="Views\Projects\List.cshtml" />
+    <Content Include="Views\Tasks\List.cshtml" />
+    <Content Include="Views\Tasks\CreateOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
