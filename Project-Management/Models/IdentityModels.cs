@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -39,9 +40,16 @@ namespace Project_Management.Models
     {
       Users = new HashSet<User>();
     }
+    [Required]
     public int Id { get; set; }
+    [Required]
+    [Display(Name = "Task name")]
     public string Name { get; set; }
+    [Required]
     public string Description { get; set; }
+    [Required]
+    [Display(Name = "Work completed in %")]
+    [Range(0, 100)]
     public double CompletedPercentage { get; set; }
     public virtual ICollection<User> Users { get; set; }
     public int ProjectId { get; set; }
