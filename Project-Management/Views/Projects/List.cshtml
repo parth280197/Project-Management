@@ -7,7 +7,7 @@
 <h2>List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateOrUpdate")
 </p>
 <table class="table table-bordered">
   <tr>
@@ -19,6 +19,9 @@
     </th>
     <th>
       @Html.DisplayNameFor(model => model.CompletedPercentage)
+    </th>
+    <th>
+      Actions
     </th>
 
   </tr>
@@ -37,11 +40,10 @@
           </div>
         </td>
 
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) 
+            
+        </td>
     </tr>
 }
 

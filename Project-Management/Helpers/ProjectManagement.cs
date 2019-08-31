@@ -5,17 +5,29 @@ namespace Project_Management.Helpers
 
   public class ProjectManagement
   {
-    private ApplicationDbContext dbContext;
-    public ProjectManagement(ApplicationDbContext dbContext)
+    private ApplicationDbContext db;
+    public ProjectManagement(ApplicationDbContext db)
     {
-      this.dbContext = dbContext;
+      this.db = db;
     }
     public bool CreateProject(Project project)
     {
       if (project != null)
       {
-        dbContext.Projects.Add(project);
-        dbContext.SaveChanges();
+        db.Projects.Add(project);
+        db.SaveChanges();
+        return true;
+      }
+      return false;
+    }
+    public bool UpdateProject(Project project)
+    {
+      var projectIndb = db.Projects.Find(project.Id);
+      if (projectIndb != null)
+      {
+        projectIndb.Name = project.Name;
+        projectIndb.Description = project.Description;
+        db.SaveChanges();
         return true;
       }
       return false;

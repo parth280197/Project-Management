@@ -23,20 +23,34 @@ namespace Project_Management.Controllers
       return View("ProjectForm");
     }
     [HttpPost]
-    public ActionResult Create(Project project)
+    public ActionResult CreateOrUpdate(Project project)
     {
       if (ModelState.IsValid)
       {
-        project.CompletedPercentage = 0;
-        project.CreatedBy = db.Users.Find(User.Identity.GetUserId());
-        projectManagement.CreateProject(project);
+        if (project.Id == 0)
+        {
+          project.CompletedPercentage = 0;
+          project.CreatedBy = db.Users.Find(User.Identity.GetUserId());
+          projectManagement.CreateProject(project);
+        }
+        else
+        {
+          projectManagement.UpdateProject(project);
+        }
       }
       else
       {
-        return HttpNotFound();
+        return View("List");
       }
       return View("List");
     }
+    [Authorize(Roles = "ProjectManager,Developer")]
+    public ActionResult Edit(int id)
+    {
+      var project = db.Projects.Find(id);
+      return View("ProjectForm", project);
+    }
+
     [Authorize(Roles = "ProjectManager,Developer")]
     public ActionResult List()
     {
