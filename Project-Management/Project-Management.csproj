@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201908300456174_SeedingCreatedRoles.Designer.cs">
       <DependentUpon>201908300456174_SeedingCreatedRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908310549248_DataAnnotationUpdatedInUserTasksTable.cs" />
+    <Compile Include="Migrations\201908310549248_DataAnnotationUpdatedInUserTasksTable.Designer.cs">
+      <DependentUpon>201908310549248_DataAnnotationUpdatedInUserTasksTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -285,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908300456174_SeedingCreatedRoles.resx">
       <DependentUpon>201908300456174_SeedingCreatedRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908310549248_DataAnnotationUpdatedInUserTasksTable.resx">
+      <DependentUpon>201908310549248_DataAnnotationUpdatedInUserTasksTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
