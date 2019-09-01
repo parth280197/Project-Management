@@ -1,4 +1,5 @@
 ﻿using Project_Management.Models;
+using Project_Management.ViewModels;
 using System.Collections.Generic;
 
 namespace Project_Management.Helpers
@@ -10,41 +11,51 @@ namespace Project_Management.Helpers
     {
       db = new ApplicationDbContext();
     }
-    public bool CreateTask(UserTask userTask, string[] developers)
+    public bool CreateTask(UserTaskFormViewModel userTaskFormView)
     {
-      if (userTask != null)
+      var task = userTaskFormView.Task;
+      var selectedUsers = userTaskFormView.SelectedId;
+      if (userTaskFormView.Task != null)
       {
-        db.Tasks.Add(userTask);
+        db.Tasks.Add(task);
         db.SaveChanges();
-        foreach (string developerId in developers)
+        foreach (string developerId in selectedUsers)
         {
           var user = db.Users.Find(developerId);
-          userTask.Users.Add(user);
+          task.Users.Add(user);
           db.SaveChanges();
         }
         return true;
       }
       return false;
     }
-    public bool UpdateTask(UserTask userTask, string[] developers)
+    public bool UpdateTask(UserTaskFormViewModel userTaskFormView)
     {
-      if (userTask != null)
+      var task = userTaskFormView.Task;
+      var selectedUsers = userTaskFormView.SelectedId;
+      if (task != null)
       {
-        var taskInDb = db.Tasks.Find(userTask.Id);
-        taskInDb.Name = userTask.Name;
-        taskInDb.ProjectId = userTask.ProjectId;
-        taskInDb.CompletedPercentage = userTask.CompletedPercentage;
+        var taskInDb = db.Tasks.Find(task.Id);
+        bool updateFlag = false;
+        taskInDb.Name = task.Name;
+        taskInDb.ProjectId = task.ProjectId;
+        taskInDb.CompletedPercentage = task.CompletedPercentage;
         List<User> users = new List<User>();
-        foreach (string developerId in developers)
+
+        foreach (string developerId in selectedUsers)
         {
           var user = db.Users.Find(developerId);
           if (!taskInDb.Users.Contains(user))
           {
             users.Add(user);
+            updateFlag = true;
           }
 
         }
-        taskInDb.Users = users;
+        if (updateFlag)
+        {
+          taskInDb.Users = users;
+        }
         db.SaveChanges();
         return true;
       }

@@ -32,7 +32,6 @@ namespace Project_Management.Controllers
           Text = u.Name,
           Value = u.Id
         });
-      userTaskFormViewModel.SelectedId = new string[] { };
       return View("TasksForm", userTaskFormViewModel);
     }
     [HttpPost]
@@ -42,26 +41,11 @@ namespace Project_Management.Controllers
       {
         if (userTaskFormViewModel.Task.Id == 0)
         {
-          UserTask userTask = new UserTask()
-          {
-            Name = userTaskFormViewModel.Task.Name,
-            Description = userTaskFormViewModel.Task.Description,
-            ProjectId = userTaskFormViewModel.Task.ProjectId,
-            CompletedPercentage = userTaskFormViewModel.Task.CompletedPercentage
-          };
-          tasksManagement.CreateTask(userTask, userTaskFormViewModel.SelectedId);
+          tasksManagement.CreateTask(userTaskFormViewModel);
         }
         else
         {
-          UserTask userTask = new UserTask()
-          {
-            Id = userTaskFormViewModel.Task.Id,
-            Name = userTaskFormViewModel.Task.Name,
-            Description = userTaskFormViewModel.Task.Description,
-            ProjectId = userTaskFormViewModel.Task.ProjectId,
-            CompletedPercentage = userTaskFormViewModel.Task.CompletedPercentage
-          };
-          tasksManagement.UpdateTask(userTask, userTaskFormViewModel.SelectedId);
+          tasksManagement.UpdateTask(userTaskFormViewModel);
         }
       }
       return RedirectToAction("List", new { id = userTaskFormViewModel.Task.ProjectId });

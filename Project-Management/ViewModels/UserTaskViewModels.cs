@@ -1,5 +1,6 @@
 ﻿using Project_Management.Models;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace Project_Management.ViewModels
@@ -12,6 +13,7 @@ namespace Project_Management.ViewModels
     }
     public UserTask Task { get; set; }
     public IEnumerable<SelectListItem> UsersList { get; set; }
+    [Required]
     public string[] SelectedId { get; set; }
   }
 }
