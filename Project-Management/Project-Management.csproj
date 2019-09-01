@@ -262,7 +262,7 @@
     <Content Include="Views\Projects\ProjectForm.cshtml" />
     <Content Include="Views\Projects\List.cshtml" />
     <Content Include="Views\Tasks\List.cshtml" />
-    <Content Include="Views\Tasks\CreateOrUpdate.cshtml" />
+    <Content Include="Views\Tasks\TasksForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

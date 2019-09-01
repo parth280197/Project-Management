@@ -1,17 +1,11 @@
-﻿using Project_Management.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using System.Web.Mvc;
 
 namespace Project_Management.ViewModels
 {
   public class UserTaskFormViewModel
   {
-    public UserTaskFormViewModel()
-    {
-      ApplicationDbContext db = new ApplicationDbContext();
-      Users = db.Users.ToList();
-    }
     public int Id { get; set; }
     [Required]
     public string Name { get; set; }
@@ -21,10 +15,8 @@ namespace Project_Management.ViewModels
     [Display(Name = "Completed Work in %")]
     public double CompletedPercentage { get; set; }
     [Required]
-    [Display(Name = "Developers")]
-    public virtual ICollection<User> Users { get; set; }
-    [Required]
     public int ProjectId { get; set; }
-
+    public IEnumerable<SelectListItem> UsersList { get; set; }
+    public string[] SelectedId { get; set; }
   }
 }

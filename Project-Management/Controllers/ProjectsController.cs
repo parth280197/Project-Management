@@ -20,7 +20,7 @@ namespace Project_Management.Controllers
     [HttpGet]
     public ActionResult Create()
     {
-      return View("ProjectForm");
+      return View("ProjectForm", new Project());
     }
     [HttpPost]
     public ActionResult CreateOrUpdate(Project project)
@@ -40,9 +40,9 @@ namespace Project_Management.Controllers
       }
       else
       {
-        return View("List");
+        return RedirectToAction("List");
       }
-      return View("List");
+      return RedirectToAction("List");
     }
     [Authorize(Roles = "ProjectManager,Developer")]
     public ActionResult Edit(int id)

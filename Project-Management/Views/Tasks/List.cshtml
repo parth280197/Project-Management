@@ -7,7 +7,7 @@
 <h2>List</h2>
 
 <p>
-    @Html.ActionLink("Create", "CreateOrUpdate",new { id = @ViewBag.ProjectId})
+    @Html.ActionLink("Create", "CreateOrUpdate",new { projectId = ViewBag.ProjectId})
 </p>
 <table class="table  table-bordered">
     <tr>
@@ -46,11 +46,11 @@
           <div>@user.Name</div>
          }
         </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) 
+            @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+        </td>
     </tr>
 }
 
