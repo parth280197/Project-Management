@@ -54,7 +54,13 @@ namespace Project_Management.Controllers
     [Authorize(Roles = "ProjectManager,Developer")]
     public ActionResult List()
     {
-      return View(db.Projects.OrderBy(p => p.CompletedPercentage).ToList());
+      if (User.IsInRole("ProjectManager"))
+      {
+        return View(db.Projects.OrderBy(p => p.CompletedPercentage).ToList());
+      }
+
+      return View(projectManagement.GetUsersProject(db.Users.Find(User.Identity.GetUserId())).OrderBy(p => p.CompletedPercentage));
+
     }
   }
 }

@@ -1,5 +1,7 @@
 ﻿using Project_Management.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Project_Management.Helpers
 {
@@ -43,6 +45,19 @@ namespace Project_Management.Helpers
       completedWork = completedWork / project.Tasks.Count;
       project.CompletedPercentage = Math.Round(completedWork);
       db.SaveChanges();
+    }
+
+    public List<Project> GetUsersProject(User user)
+    {
+      var projects = new HashSet<Project>();
+      foreach (UserTask task in db.Tasks)
+      {
+        if (task.Users.Contains(user))
+        {
+          projects.Add(task.Project);
+        }
+      }
+      return projects.ToList();
     }
   }
 }
