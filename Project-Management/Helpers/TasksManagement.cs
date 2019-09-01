@@ -1,6 +1,8 @@
 ﻿using Project_Management.Models;
 using Project_Management.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Project_Management.Helpers
 {
@@ -41,7 +43,19 @@ namespace Project_Management.Helpers
         taskInDb.ProjectId = task.ProjectId;
         taskInDb.CompletedPercentage = task.CompletedPercentage;
         List<User> users = new List<User>();
-
+        foreach (string developerId in selectedUsers)
+        {
+          var user = db.Users.Find(developerId);
+          users.Add(user);
+        }
+        foreach (User user in taskInDb.Users)
+        {
+          if (!users.Contains(user))
+          {
+            users.Remove(user);
+            updateFlag = true;
+          }
+        }
         foreach (string developerId in selectedUsers)
         {
           var user = db.Users.Find(developerId);
@@ -50,7 +64,6 @@ namespace Project_Management.Helpers
             users.Add(user);
             updateFlag = true;
           }
-
         }
         if (updateFlag)
         {
@@ -60,6 +73,31 @@ namespace Project_Management.Helpers
         return true;
       }
       return false;
+    }
+    public UserTaskFormViewModel LoadViewModel(int taskId)
+    {
+      var task = db.Tasks.Find(taskId);
+      List<string> selectedUsers = new List<string>();
+      selectedUsers = task.Users.Select(u => u.Id).ToList();
+      UserTaskFormViewModel userTaskFormViewModel = new UserTaskFormViewModel()
+      {
+        Task = new UserTask()
+        {
+          Id = task.Id,
+          Name = task.Name,
+          Description = task.Description,
+          ProjectId = task.ProjectId,
+          CompletedPercentage = task.CompletedPercentage
+        },
+        UsersList = db.Users.Where(u => u.PersonType == PersonType.Developer)
+        .Select(u => new SelectListItem
+        {
+          Text = u.Name,
+          Value = u.Id
+        }),
+        SelectedId = selectedUsers.ToArray(),
+      };
+      return userTaskFormViewModel;
     }
   }
 }

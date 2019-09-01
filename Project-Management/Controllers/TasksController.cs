@@ -1,7 +1,6 @@
 ﻿using Project_Management.Helpers;
 using Project_Management.Models;
 using Project_Management.ViewModels;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -52,29 +51,7 @@ namespace Project_Management.Controllers
     }
     public ActionResult Edit(int id)
     {
-      var task = db.Tasks.Find(id);
-      List<string> selectedUsers = new List<string>();
-      selectedUsers = task.Users.Select(u => u.Id).ToList();
-      UserTaskFormViewModel userTaskFormViewModel = new UserTaskFormViewModel()
-      {
-        Task = new UserTask()
-        {
-          Id = task.Id,
-          Name = task.Name,
-          Description = task.Description,
-          ProjectId = task.ProjectId,
-          CompletedPercentage = task.CompletedPercentage
-        },
-        UsersList = db.Users.Where(u => u.PersonType == PersonType.Developer)
-        .Select(u => new SelectListItem
-        {
-          Text = u.Name,
-          Value = u.Id
-        }),
-        SelectedId = selectedUsers.ToArray(),
-      };
-
-      return View("TasksForm", userTaskFormViewModel);
+      return View("TasksForm", tasksManagement.LoadViewModel(id));
     }
   }
 }
