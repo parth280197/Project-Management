@@ -10,21 +10,26 @@
     @Html.ActionLink("Create", "CreateOrUpdate",new { projectId = ViewBag.ProjectId})
 </p>
 <table class="table  table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Project.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompletedPercentage)
-        </th>
-        <th></th>
-    </tr>
+  <tr>
+    <th>
+      @Html.DisplayNameFor(model => model.Project.Name)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.Name)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.Description)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.CompletedPercentage)
+    </th>
+    <th>
+      Developers
+    </th>
+    <th>
+      Actions
+    </th>
+  </tr>
 
 @foreach (var item in Model) {
     <tr>
@@ -38,7 +43,9 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CompletedPercentage)
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: @item.CompletedPercentage%" aria-valuenow="@item.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@item.CompletedPercentage</div>
+          </div>
         </td>
         <td>
          @foreach(var user in item.Users)
