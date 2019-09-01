@@ -119,5 +119,19 @@ namespace Project_Management.Helpers
       };
       return userTaskFormViewModel;
     }
+    public DevTaskViewModel LoadDevViewModel(int taskId)
+    {
+      var task = db.Tasks.Find(taskId);
+      DevTaskViewModel devTaskViewModel = new DevTaskViewModel()
+      {
+        Id = task.Id,
+        Name = task.Name,
+        Description = task.Description,
+        ProjectId = task.ProjectId,
+        CompletedPercentage = task.CompletedPercentage
+      };
+      return devTaskViewModel;
+    }
+
   }
 }

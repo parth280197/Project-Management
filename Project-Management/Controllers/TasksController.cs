@@ -57,7 +57,9 @@ namespace Project_Management.Controllers
     }
     public ActionResult Edit(int id)
     {
-      return View("TasksForm", tasksManagement.LoadViewModel(id));
+      if (User.IsInRole("ProjectManager"))
+        return View("TasksForm", tasksManagement.LoadViewModel(id));
+      return View("DevTaskForm", tasksManagement.LoadDevViewModel(id));
     }
   }
 }
