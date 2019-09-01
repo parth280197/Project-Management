@@ -31,9 +31,15 @@ namespace Project_Management.Models
       Tasks = new HashSet<UserTask>();
     }
     public int Id { get; set; }
+    [Required]
+    [Display(Name = "Project name")]
     public string Name { get; set; }
+    [Required]
     public string Description { get; set; }
     public virtual User CreatedBy { get; set; }
+    [Required]
+    [Display(Name = "Work completed in %")]
+    [Range(0, 100)]
     public double CompletedPercentage { get; set; }
     public virtual ICollection<UserTask> Tasks { get; set; }
   }
