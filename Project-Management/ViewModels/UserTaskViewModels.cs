@@ -12,8 +12,10 @@ namespace Project_Management.ViewModels
       Task = new UserTask();
     }
     public UserTask Task { get; set; }
+    [Display(Name = "Select developers for the Task.")]
     public IEnumerable<SelectListItem> UsersList { get; set; }
-    [Required]
+    [Required(ErrorMessage = "*Please select developer. \n *To select multiple developer hold ctrl key.")]
+
     public string[] SelectedId { get; set; }
   }
 }
