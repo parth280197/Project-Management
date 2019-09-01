@@ -1,4 +1,5 @@
-﻿using Project_Management.Helpers;
+﻿using Microsoft.AspNet.Identity;
+using Project_Management.Helpers;
 using Project_Management.Models;
 using Project_Management.ViewModels;
 using System.Linq;
@@ -19,7 +20,12 @@ namespace Project_Management.Controllers
     public ActionResult List(int id)
     {
       ViewBag.ProjectId = id;
-      return View(db.Projects.Find(id).Tasks.OrderBy(t => t.CompletedPercentage).ToList());
+      if (User.IsInRole("ProjectManager"))
+      {
+        return View(db.Projects.Find(id).Tasks.OrderBy(t => t.CompletedPercentage).ToList());
+      }
+      return View(tasksManagement.GetUserTasks(id, User.Identity.GetUserId()));
+
     }
     public ActionResult CreateOrUpdate(int projectId)
     {

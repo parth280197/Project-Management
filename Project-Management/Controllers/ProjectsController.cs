@@ -44,7 +44,7 @@ namespace Project_Management.Controllers
       }
       return RedirectToAction("List");
     }
-    [Authorize(Roles = "ProjectManager,Developer")]
+    [Authorize(Roles = "ProjectManager")]
     public ActionResult Edit(int id)
     {
       var project = db.Projects.Find(id);

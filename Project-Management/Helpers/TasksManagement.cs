@@ -15,6 +15,20 @@ namespace Project_Management.Helpers
       db = new ApplicationDbContext();
       projectManagement = new ProjectManagement(db);
     }
+    public List<UserTask> GetUserTasks(int projectId, string userId)
+    {
+      var user = db.Users.Find(userId);
+      var project = db.Projects.Find(projectId);
+      var userTasks = new List<UserTask>();
+      foreach (UserTask task in project.Tasks)
+      {
+        if (task.Users.Contains(user))
+        {
+          userTasks.Add(task);
+        }
+      }
+      return userTasks;
+    }
     public bool CreateTask(UserTaskFormViewModel userTaskFormView)
     {
       var task = userTaskFormView.Task;
