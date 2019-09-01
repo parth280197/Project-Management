@@ -25,15 +25,14 @@ namespace Project_Management.Controllers
     public ActionResult CreateOrUpdate(int projectId)
     {
       UserTaskFormViewModel userTaskFormViewModel = new ViewModels.UserTaskFormViewModel();
-      userTaskFormViewModel.ProjectId = projectId;
+      userTaskFormViewModel.Task.ProjectId = projectId;
       userTaskFormViewModel.UsersList = db.Users.Where(u => u.PersonType == PersonType.Developer)
         .Select(u => new SelectListItem
         {
           Text = u.Name,
           Value = u.Id
         });
-      userTaskFormViewModel.SelectedId = new string[] { "46c909c0-b2a2-4b6b-8577-486a62868a78" };
-      //userTaskFormViewModel.Users = db.Users.ToList();
+      userTaskFormViewModel.SelectedId = new string[] { };
       return View("TasksForm", userTaskFormViewModel);
     }
     [HttpPost]
@@ -41,14 +40,14 @@ namespace Project_Management.Controllers
     {
       if (ModelState.IsValid)
       {
-        if (userTaskFormViewModel.Id == 0)
+        if (userTaskFormViewModel.Task.Id == 0)
         {
           UserTask userTask = new UserTask()
           {
-            Name = userTaskFormViewModel.Name,
-            Description = userTaskFormViewModel.Description,
-            ProjectId = userTaskFormViewModel.ProjectId,
-            CompletedPercentage = userTaskFormViewModel.CompletedPercentage
+            Name = userTaskFormViewModel.Task.Name,
+            Description = userTaskFormViewModel.Task.Description,
+            ProjectId = userTaskFormViewModel.Task.ProjectId,
+            CompletedPercentage = userTaskFormViewModel.Task.CompletedPercentage
           };
           tasksManagement.CreateTask(userTask, userTaskFormViewModel.SelectedId);
         }
@@ -56,16 +55,16 @@ namespace Project_Management.Controllers
         {
           UserTask userTask = new UserTask()
           {
-            Id = userTaskFormViewModel.Id,
-            Name = userTaskFormViewModel.Name,
-            Description = userTaskFormViewModel.Description,
-            ProjectId = userTaskFormViewModel.ProjectId,
-            CompletedPercentage = userTaskFormViewModel.CompletedPercentage
+            Id = userTaskFormViewModel.Task.Id,
+            Name = userTaskFormViewModel.Task.Name,
+            Description = userTaskFormViewModel.Task.Description,
+            ProjectId = userTaskFormViewModel.Task.ProjectId,
+            CompletedPercentage = userTaskFormViewModel.Task.CompletedPercentage
           };
           tasksManagement.UpdateTask(userTask, userTaskFormViewModel.SelectedId);
         }
       }
-      return RedirectToAction("List", new { id = userTaskFormViewModel.ProjectId });
+      return RedirectToAction("List", new { id = userTaskFormViewModel.Task.ProjectId });
     }
     public ActionResult Edit(int id)
     {
@@ -74,10 +73,14 @@ namespace Project_Management.Controllers
       selectedUsers = task.Users.Select(u => u.Id).ToList();
       UserTaskFormViewModel userTaskFormViewModel = new UserTaskFormViewModel()
       {
-        Name = task.Name,
-        Description = task.Description,
-        ProjectId = task.ProjectId,
-        CompletedPercentage = task.CompletedPercentage,
+        Task = new UserTask()
+        {
+          Id = task.Id,
+          Name = task.Name,
+          Description = task.Description,
+          ProjectId = task.ProjectId,
+          CompletedPercentage = task.CompletedPercentage
+        },
         UsersList = db.Users.Where(u => u.PersonType == PersonType.Developer)
         .Select(u => new SelectListItem
         {
