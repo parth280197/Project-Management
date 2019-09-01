@@ -1,4 +1,5 @@
 ﻿using Project_Management.Models;
+using System;
 
 namespace Project_Management.Helpers
 {
@@ -31,6 +32,17 @@ namespace Project_Management.Helpers
         return true;
       }
       return false;
+    }
+    public void UpdateCompletedWork(Project project)
+    {
+      double completedWork = 0;
+      foreach (UserTask task in project.Tasks)
+      {
+        completedWork += task.CompletedPercentage;
+      }
+      completedWork = completedWork / project.Tasks.Count;
+      project.CompletedPercentage = Math.Round(completedWork);
+      db.SaveChanges();
     }
   }
 }

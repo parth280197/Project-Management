@@ -9,13 +9,16 @@ namespace Project_Management.Helpers
   public class TasksManagement
   {
     private ApplicationDbContext db;
+    private ProjectManagement projectManagement;
     public TasksManagement()
     {
       db = new ApplicationDbContext();
+      projectManagement = new ProjectManagement(db);
     }
     public bool CreateTask(UserTaskFormViewModel userTaskFormView)
     {
       var task = userTaskFormView.Task;
+      task.Project = db.Projects.Find(task.ProjectId);
       var selectedUsers = userTaskFormView.SelectedId;
       if (userTaskFormView.Task != null)
       {
@@ -27,6 +30,7 @@ namespace Project_Management.Helpers
           task.Users.Add(user);
           db.SaveChanges();
         }
+        projectManagement.UpdateCompletedWork(task.Project);
         return true;
       }
       return false;
@@ -34,6 +38,7 @@ namespace Project_Management.Helpers
     public bool UpdateTask(UserTaskFormViewModel userTaskFormView)
     {
       var task = userTaskFormView.Task;
+      task.Project = db.Projects.Find(task.ProjectId);
       var selectedUsers = userTaskFormView.SelectedId;
       if (task != null)
       {
@@ -70,6 +75,7 @@ namespace Project_Management.Helpers
           taskInDb.Users = users;
         }
         db.SaveChanges();
+        projectManagement.UpdateCompletedWork(task.Project);
         return true;
       }
       return false;

@@ -19,7 +19,7 @@ namespace Project_Management.Controllers
     public ActionResult List(int id)
     {
       ViewBag.ProjectId = id;
-      return View(db.Projects.Find(id).Tasks.ToList());
+      return View(db.Projects.Find(id).Tasks.OrderBy(t => t.CompletedPercentage).ToList());
     }
     public ActionResult CreateOrUpdate(int projectId)
     {
