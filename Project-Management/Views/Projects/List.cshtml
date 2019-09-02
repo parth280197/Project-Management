@@ -21,6 +21,9 @@
       @Html.DisplayNameFor(model => model.CompletedPercentage)
     </th>
     <th>
+      @Html.DisplayNameFor(model => model.Priority)
+    </th>
+    <th>
       Actions
     </th>
 
@@ -38,6 +41,9 @@
           <div class="progress">
             <div class="progress-bar bg-success" role="progressbar" style="width: @item.CompletedPercentage%" aria-valuenow="@item.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@item.CompletedPercentage</div>
           </div>
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.Priority)
         </td>
 
         <td>
