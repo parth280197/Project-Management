@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 namespace Project_Management.Controllers
 {
+  [Authorize(Roles = "ProjectManager,Developer")]
   public class NotesController : Controller
   {
     // GET: Notes

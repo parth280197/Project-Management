@@ -17,6 +17,7 @@ namespace Project_Management.Controllers
       tasksManagement = new TasksManagement();
     }
     // GET: Tasks
+    [Authorize(Roles = "ProjectManager,Developer")]
     public ActionResult List(int id)
     {
       ViewBag.ProjectId = id;
@@ -27,6 +28,7 @@ namespace Project_Management.Controllers
       return View(tasksManagement.GetUserTasks(id, User.Identity.GetUserId()));
 
     }
+    [Authorize(Roles = "ProjectManager")]
     public ActionResult CreateOrUpdate(int projectId)
     {
       UserTaskFormViewModel userTaskFormViewModel = new ViewModels.UserTaskFormViewModel();
@@ -55,13 +57,14 @@ namespace Project_Management.Controllers
       }
       return RedirectToAction("List", new { id = userTaskFormViewModel.Task.ProjectId });
     }
+    [Authorize(Roles = "ProjectManager,Developer")]
     public ActionResult Edit(int id)
     {
       if (User.IsInRole("ProjectManager"))
         return View("TasksForm", tasksManagement.LoadViewModel(id));
       return View("DevTaskForm", tasksManagement.LoadDevViewModel(id));
     }
-
+    [Authorize(Roles = "Developer")]
     public ActionResult DevUpdateTask(DevTaskViewModel devTaskViewModel)
     {
       tasksManagement.DevUpdateTask(devTaskViewModel, User.Identity.GetUserId());

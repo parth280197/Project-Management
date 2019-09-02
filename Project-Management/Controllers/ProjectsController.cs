@@ -18,11 +18,12 @@ namespace Project_Management.Controllers
     // GET: Projects
     [Authorize(Roles = "ProjectManager")]
     [HttpGet]
+    [Authorize(Roles = "ProjectManager")]
     public ActionResult Create()
     {
       return View("ProjectForm", new Project());
     }
-    [HttpPost]
+    [Authorize(Roles = "ProjectManager")]
     public ActionResult CreateOrUpdate(Project project)
     {
       if (ModelState.IsValid)
