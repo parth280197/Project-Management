@@ -21,6 +21,7 @@ namespace Project_Management.Controllers
     [Authorize(Roles = "ProjectManager")]
     public ActionResult Create()
     {
+      ViewBag.Action = "Create";
       return View("ProjectForm", new Project());
     }
     [Authorize(Roles = "ProjectManager")]
@@ -48,6 +49,7 @@ namespace Project_Management.Controllers
     [Authorize(Roles = "ProjectManager")]
     public ActionResult Edit(int id)
     {
+      ViewBag.Action = "Update";
       var project = db.Projects.Find(id);
       return View("ProjectForm", project);
     }
