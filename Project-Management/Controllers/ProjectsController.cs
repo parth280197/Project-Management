@@ -59,10 +59,10 @@ namespace Project_Management.Controllers
     {
       if (User.IsInRole("ProjectManager"))
       {
-        return View(db.Projects.OrderBy(p => p.CompletedPercentage).ToList());
+        return View(db.Projects.OrderByDescending(p => p.CompletedPercentage).ToList());
       }
 
-      return View(projectManagement.GetUsersProject(db.Users.Find(User.Identity.GetUserId())).OrderBy(p => p.CompletedPercentage));
+      return View(projectManagement.GetUsersProject(db.Users.Find(User.Identity.GetUserId())).OrderByDescending(p => p.CompletedPercentage));
 
     }
   }

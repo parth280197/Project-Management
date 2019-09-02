@@ -23,7 +23,7 @@ namespace Project_Management.Controllers
       ViewBag.ProjectId = id;
       if (User.IsInRole("ProjectManager"))
       {
-        return View(db.Projects.Find(id).Tasks.OrderBy(t => t.CompletedPercentage).ToList());
+        return View(db.Projects.Find(id).Tasks.OrderByDescending(t => t.CompletedPercentage).ToList());
       }
       return View(tasksManagement.GetUserTasks(id, User.Identity.GetUserId()));
 

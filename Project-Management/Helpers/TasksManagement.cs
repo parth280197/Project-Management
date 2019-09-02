@@ -28,7 +28,7 @@ namespace Project_Management.Helpers
           userTasks.Add(task);
         }
       }
-      return userTasks;
+      return userTasks.OrderByDescending(t => t.CompletedPercentage).ToList();
     }
     public bool CreateTask(UserTaskFormViewModel userTaskFormView)
     {
