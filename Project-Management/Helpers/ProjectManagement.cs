@@ -28,6 +28,7 @@ namespace Project_Management.Helpers
       var projectIndb = db.Projects.Find(project.Id);
       if (projectIndb != null)
       {
+        projectIndb.Priority = project.Priority;
         projectIndb.Name = project.Name;
         projectIndb.Description = project.Description;
         db.SaveChanges();

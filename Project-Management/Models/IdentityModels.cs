@@ -93,9 +93,9 @@ namespace Project_Management.Models
 
   public enum Priority
   {
-    High,
-    Normal,
     Low,
+    Normal,
+    High,
   }
   public class ApplicationDbContext : IdentityDbContext<User>
   {
