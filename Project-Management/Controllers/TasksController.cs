@@ -61,5 +61,11 @@ namespace Project_Management.Controllers
         return View("TasksForm", tasksManagement.LoadViewModel(id));
       return View("DevTaskForm", tasksManagement.LoadDevViewModel(id));
     }
+
+    public ActionResult DevUpdateTask(DevTaskViewModel devTaskViewModel)
+    {
+      tasksManagement.DevUpdateTask(devTaskViewModel, User.Identity.GetUserId());
+      return RedirectToAction("List", new { id = devTaskViewModel.ProjectId });
+    }
   }
 }

@@ -1,5 +1,6 @@
 ﻿using Project_Management.Models;
 using Project_Management.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -131,6 +132,21 @@ namespace Project_Management.Helpers
         CompletedPercentage = task.CompletedPercentage
       };
       return devTaskViewModel;
+    }
+
+    public bool DevUpdateTask(DevTaskViewModel devTaskViewModel, string userId)
+    {
+      var taskInDb = db.Tasks.Find(devTaskViewModel.Id);
+      taskInDb.CompletedPercentage = devTaskViewModel.CompletedPercentage;
+      var note = new Notes()
+      {
+        Comment = devTaskViewModel.Note,
+        CreatedDate = DateTime.Now,
+        User = db.Users.Find(userId)
+      };
+      taskInDb.Notes.Add(note);
+      db.SaveChanges();
+      return false;
     }
 
   }
