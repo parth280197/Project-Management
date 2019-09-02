@@ -12,7 +12,9 @@ namespace Project_Management.Models
   // You can add profile data for the user by adding more properties to your User class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
   public class User : IdentityUser
   {
+    [Required]
     public string Name { get; set; }
+    [Required]
     public PersonType PersonType { get; set; }
     public virtual ICollection<UserTask> Tasks { get; set; }
     public virtual ICollection<Notes> Notes { get; set; }
@@ -41,6 +43,8 @@ namespace Project_Management.Models
     [Display(Name = "Work completed in %")]
     [Range(0, 100)]
     public double CompletedPercentage { get; set; }
+    [Required]
+    public Priority Priority { get; set; }
     public virtual ICollection<UserTask> Tasks { get; set; }
   }
 
@@ -61,6 +65,8 @@ namespace Project_Management.Models
     [Display(Name = "Work completed in %")]
     [Range(0, 100)]
     public double CompletedPercentage { get; set; }
+    [Required]
+    public Priority priority { get; set; }
     public virtual ICollection<User> Users { get; set; }
     [Required]
     public int ProjectId { get; set; }
@@ -71,7 +77,9 @@ namespace Project_Management.Models
   public class Notes
   {
     public int Id { get; set; }
+    [Required]
     public string Comment { get; set; }
+    [Required]
     public DateTime CreatedDate { get; set; }
     public virtual UserTask UserTask { get; set; }
     public virtual User User { get; set; }
@@ -81,6 +89,13 @@ namespace Project_Management.Models
   {
     ProjectManager,
     Developer,
+  }
+
+  public enum Priority
+  {
+    High,
+    Normal,
+    Low,
   }
   public class ApplicationDbContext : IdentityDbContext<User>
   {
