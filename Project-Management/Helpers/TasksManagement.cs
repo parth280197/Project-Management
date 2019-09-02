@@ -62,6 +62,7 @@ namespace Project_Management.Helpers
         taskInDb.Name = task.Name;
         taskInDb.ProjectId = task.ProjectId;
         taskInDb.CompletedPercentage = task.CompletedPercentage;
+        taskInDb.Priority = task.Priority;
         List<User> users = new List<User>();
         foreach (string developerId in selectedUsers)
         {
@@ -108,7 +109,8 @@ namespace Project_Management.Helpers
           Name = task.Name,
           Description = task.Description,
           ProjectId = task.ProjectId,
-          CompletedPercentage = task.CompletedPercentage
+          CompletedPercentage = task.CompletedPercentage,
+          Priority = task.Priority,
         },
         UsersList = db.Users.Where(u => u.PersonType == PersonType.Developer)
         .Select(u => new SelectListItem

@@ -66,7 +66,7 @@ namespace Project_Management.Models
     [Range(0, 100)]
     public double CompletedPercentage { get; set; }
     [Required]
-    public Priority priority { get; set; }
+    public Priority Priority { get; set; }
     public virtual ICollection<User> Users { get; set; }
     [Required]
     public int ProjectId { get; set; }

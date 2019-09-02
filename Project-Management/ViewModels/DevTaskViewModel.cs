@@ -19,6 +19,9 @@ namespace Project_Management.ViewModels
     public virtual ICollection<User> Users { get; set; }
     [Required]
     public int ProjectId { get; set; }
+    [Required]
+    public Priority Priority { get; set; }
+    [Required]
     public string Note { get; set; }
   }
 }

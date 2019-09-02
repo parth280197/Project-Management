@@ -10,50 +10,58 @@
 {
   @Html.AntiForgeryToken()
 
-  <div class="form-horizontal">
-    <h4>UserTask</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-      @Html.LabelFor(model => model.Task.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-      <div class="col-md-10">
-        @Html.EditorFor(model => model.Task.Name, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Task.Name, "", new { @class = "text-danger" })
-      </div>
-    </div>
-
-    <div class="form-group">
-      @Html.LabelFor(model => model.Task.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-      <div class="col-md-10">
-        @Html.EditorFor(model => model.Task.Description, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Task.Description, "", new { @class = "text-danger" })
-      </div>
-    </div>
-
-    <div class="form-group">
-      @Html.LabelFor(model => model.Task.CompletedPercentage, htmlAttributes: new { @class = "control-label col-md-2" })
-      <div class="col-md-10">
-        @Html.EditorFor(model => model.Task.CompletedPercentage, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Task.CompletedPercentage, "", new { @class = "text-danger" })
-      </div>
-    </div>
-
-    <div class="form-group">
-      @Html.LabelFor(model => model.UsersList, htmlAttributes: new { @class = "control-label col-md-2" })
-      <div class="col-md-10">
-        @Html.ListBoxFor(model => model.SelectedId, Model.UsersList)
-        @Html.ValidationMessageFor(model => model.SelectedId, "", new { @class = "text-danger" })
-      </div>
-    </div>
-
-    <div class="form-group">
-      @Html.HiddenFor(model => model.Task.Id)
-      @Html.HiddenFor(model => model.Task.ProjectId)
-      <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Create" class="btn btn-default" />
-      </div>
+<div class="form-horizontal">
+  <h4>UserTask</h4>
+  <hr />
+  @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+  <div class="form-group">
+    @Html.LabelFor(model => model.Task.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.Task.Name, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.Task.Name, "", new { @class = "text-danger" })
     </div>
   </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.Task.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.Task.Description, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.Task.Description, "", new { @class = "text-danger" })
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.Task.CompletedPercentage, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.Task.CompletedPercentage, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.Task.CompletedPercentage, "", new { @class = "text-danger" })
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.Task.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EnumDropDownListFor(model => model.Task.Priority,new { @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.Task.Priority, "", new { @class = "text-danger" })
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.UsersList, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.ListBoxFor(model => model.SelectedId, Model.UsersList)
+      @Html.ValidationMessageFor(model => model.SelectedId, "", new { @class = "text-danger" })
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.HiddenFor(model => model.Task.Id)
+    @Html.HiddenFor(model => model.Task.ProjectId)
+    <div class="col-md-offset-2 col-md-10">
+      <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+  </div>
+</div>
 }
 
 <div>
