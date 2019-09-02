@@ -18,21 +18,21 @@ namespace Project_Management.Controllers
     }
     // GET: Tasks
     [Authorize(Roles = "ProjectManager,Developer")]
-    public ActionResult List(int id)
+    public ActionResult List(int projectId)
     {
-      ViewBag.ProjectId = id;
+      ViewBag.ProjectId = projectId;
       if (User.IsInRole("ProjectManager"))
-        return View(db.Projects.Find(id).Tasks.OrderByDescending(t => t.CompletedPercentage).ToList());
-      return View(tasksManagement.GetUserTasks(id, User.Identity.GetUserId()).OrderByDescending(t => t.Priority));
+        return View(db.Projects.Find(projectId).Tasks.OrderByDescending(t => t.CompletedPercentage).ToList());
+      return View(tasksManagement.GetUserTasks(projectId, User.Identity.GetUserId()).OrderByDescending(t => t.Priority));
 
     }
     [Authorize(Roles = "ProjectManager,Developer")]
-    public ActionResult ListByPriority(int id)
+    public ActionResult ListByPriority(int projectId)
     {
-      ViewBag.ProjectId = id;
+      ViewBag.ProjectId = projectId;
       if (User.IsInRole("ProjectManager"))
-        return View(db.Projects.Find(id).Tasks.OrderByDescending(t => t.Priority).ToList());
-      return View(tasksManagement.GetUserTasks(id, User.Identity.GetUserId()).OrderByDescending(t => t.Priority));
+        return View("List", db.Projects.Find(projectId).Tasks.OrderByDescending(t => t.Priority).ToList());
+      return View("List", tasksManagement.GetUserTasks(projectId, User.Identity.GetUserId()).OrderByDescending(t => t.Priority));
 
     }
     [Authorize(Roles = "ProjectManager")]

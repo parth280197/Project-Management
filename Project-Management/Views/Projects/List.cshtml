@@ -55,9 +55,9 @@
         <td>
           @if (User.IsInRole("ProjectManager"))
           {
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            @Html.ActionLink("Edit", "Edit", new { projectId = item.Id })
           }
-          @Html.ActionLink("Tasks", "List", "Tasks", new { id = item.Id }, null)
+          @Html.ActionLink("Tasks", "List", "Tasks", new { projectId = item.Id }, null)
         </td>
     </tr>
 }

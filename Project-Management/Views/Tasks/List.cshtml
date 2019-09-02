@@ -10,10 +10,10 @@
   @Html.ActionLink("Create", "CreateOrUpdate", new { projectId = ViewBag.ProjectId })
 </p>
 <p>
-  @Html.ActionLink("Order by completed work", "List")
+  @Html.ActionLink("Order by completed work", "List", new { projectId = ViewBag.ProjectId })
 </p>
 <p>
-  @Html.ActionLink("Order by priority", "ListByPriority", "Projects")
+  @Html.ActionLink("Order by priority", "ListByPriority", new { projectId = ViewBag.ProjectId })
 </p>
 <table class="table  table-bordered">
   <tr>

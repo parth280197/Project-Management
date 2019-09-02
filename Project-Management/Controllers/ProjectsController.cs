@@ -47,10 +47,10 @@ namespace Project_Management.Controllers
       return RedirectToAction("List");
     }
     [Authorize(Roles = "ProjectManager")]
-    public ActionResult Edit(int id)
+    public ActionResult Edit(int projectId)
     {
       ViewBag.Action = "Update";
-      var project = db.Projects.Find(id);
+      var project = db.Projects.Find(projectId);
       return View("ProjectForm", project);
     }
 
