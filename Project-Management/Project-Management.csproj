@@ -170,11 +170,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\NotesManagement.cs" />
     <Compile Include="Helpers\ProjectManagement.cs" />
     <Compile Include="Helpers\RoleManagement.cs" />
     <Compile Include="Helpers\TasksManagement.cs" />
@@ -269,6 +271,7 @@
     <Content Include="Views\Tasks\List.cshtml" />
     <Content Include="Views\Tasks\TasksForm.cshtml" />
     <Content Include="Views\Tasks\DevTaskForm.cshtml" />
+    <Content Include="Views\Notes\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

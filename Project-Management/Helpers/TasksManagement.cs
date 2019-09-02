@@ -148,6 +148,10 @@ namespace Project_Management.Helpers
       db.SaveChanges();
       return false;
     }
-
+    public UserTask GetUserTask(int taskId)
+    {
+      var task = db.Tasks.Find(taskId);
+      return task;
+    }
   }
 }

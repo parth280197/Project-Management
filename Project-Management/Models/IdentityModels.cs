@@ -95,5 +95,7 @@ namespace Project_Management.Models
     {
       return new ApplicationDbContext();
     }
+
+    public System.Data.Entity.DbSet<Project_Management.Models.Notes> Notes { get; set; }
   }
 }
