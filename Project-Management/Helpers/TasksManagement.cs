@@ -28,7 +28,7 @@ namespace Project_Management.Helpers
           userTasks.Add(task);
         }
       }
-      return userTasks.OrderByDescending(t => t.CompletedPercentage).ToList();
+      return userTasks.ToList();
     }
     public bool CreateTask(UserTaskFormViewModel userTaskFormView)
     {
@@ -140,6 +140,7 @@ namespace Project_Management.Helpers
     {
       var taskInDb = db.Tasks.Find(devTaskViewModel.Id);
       taskInDb.CompletedPercentage = devTaskViewModel.CompletedPercentage;
+      taskInDb.Priority = devTaskViewModel.Priority;
       var note = new Notes()
       {
         Comment = devTaskViewModel.Note,

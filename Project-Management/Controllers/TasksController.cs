@@ -22,10 +22,17 @@ namespace Project_Management.Controllers
     {
       ViewBag.ProjectId = id;
       if (User.IsInRole("ProjectManager"))
-      {
         return View(db.Projects.Find(id).Tasks.OrderByDescending(t => t.CompletedPercentage).ToList());
-      }
-      return View(tasksManagement.GetUserTasks(id, User.Identity.GetUserId()));
+      return View(tasksManagement.GetUserTasks(id, User.Identity.GetUserId()).OrderByDescending(t => t.Priority));
+
+    }
+    [Authorize(Roles = "ProjectManager,Developer")]
+    public ActionResult ListByPriority(int id)
+    {
+      ViewBag.ProjectId = id;
+      if (User.IsInRole("ProjectManager"))
+        return View(db.Projects.Find(id).Tasks.OrderByDescending(t => t.Priority).ToList());
+      return View(tasksManagement.GetUserTasks(id, User.Identity.GetUserId()).OrderByDescending(t => t.Priority));
 
     }
     [Authorize(Roles = "ProjectManager")]

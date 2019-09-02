@@ -1,13 +1,19 @@
 ﻿@model IEnumerable<Project_Management.Models.UserTask>
 
 @{
-    ViewBag.Title = "List";
+  ViewBag.Title = "List";
 }
 
 <h2>List</h2>
 
 <p>
-    @Html.ActionLink("Create", "CreateOrUpdate",new { projectId = ViewBag.ProjectId})
+  @Html.ActionLink("Create", "CreateOrUpdate", new { projectId = ViewBag.ProjectId })
+</p>
+<p>
+  @Html.ActionLink("Order by completed work", "List")
+</p>
+<p>
+  @Html.ActionLink("Order by priority", "ListByPriority", "Projects")
 </p>
 <table class="table  table-bordered">
   <tr>
@@ -34,38 +40,39 @@
     </th>
   </tr>
 
-@foreach (var item in Model) {
+  @foreach (var item in Model)
+  {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Project.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-          <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style="width: @item.CompletedPercentage%" aria-valuenow="@item.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@item.CompletedPercentage</div>
-          </div>
-        </td>
-        <td>
-          @Html.DisplayFor(modelItem => item.Priority)
-        </td>
-        <td>
-         @foreach(var user in item.Users)
-         {
+      <td>
+        @Html.DisplayFor(modelItem => item.Project.Name)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Name)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Description)
+      </td>
+      <td>
+        <div class="progress">
+          <div class="progress-bar bg-success" role="progressbar" style="width: @item.CompletedPercentage%" aria-valuenow="@item.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@item.CompletedPercentage</div>
+        </div>
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Priority)
+      </td>
+      <td>
+        @foreach (var user in item.Users)
+        {
           <div>@user.Name</div>
-         }
-        </td>
-        <td>
-          @Html.ActionLink("Update", "Edit", new { id = item.Id })
-          @Html.ActionLink("Notes", "List","Notes", new { id = item.Id },null)
-          @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
+        }
+      </td>
+      <td>
+        @Html.ActionLink("Update", "Edit", new { id = item.Id })
+        @Html.ActionLink("Notes", "List", "Notes", new { id = item.Id }, null)
+        @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
           @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-        </td>
+      </td>
     </tr>
-}
+  }
 
 </table>
