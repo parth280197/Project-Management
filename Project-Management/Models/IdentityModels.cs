@@ -45,6 +45,8 @@ namespace Project_Management.Models
     public double CompletedPercentage { get; set; }
     [Required]
     public Priority Priority { get; set; }
+    [Required]
+    public DateTime Deadline { get; set; }
     public virtual ICollection<UserTask> Tasks { get; set; }
   }
 
@@ -67,6 +69,8 @@ namespace Project_Management.Models
     public double CompletedPercentage { get; set; }
     [Required]
     public Priority Priority { get; set; }
+    [Required]
+    public DateTime Deadline { get; set; }
     public virtual ICollection<User> Users { get; set; }
     [Required]
     public int ProjectId { get; set; }

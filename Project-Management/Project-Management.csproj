@@ -205,6 +205,10 @@
     <Compile Include="Migrations\201909021919217_PriorityAddedAndDataAnnotaionUpdatedInModels.Designer.cs">
       <DependentUpon>201909021919217_PriorityAddedAndDataAnnotaionUpdatedInModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909030401433_DeadlineAddedToTaskTableAndProjectTable.cs" />
+    <Compile Include="Migrations\201909030401433_DeadlineAddedToTaskTableAndProjectTable.Designer.cs">
+      <DependentUpon>201909030401433_DeadlineAddedToTaskTableAndProjectTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -311,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909021919217_PriorityAddedAndDataAnnotaionUpdatedInModels.resx">
       <DependentUpon>201909021919217_PriorityAddedAndDataAnnotaionUpdatedInModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909030401433_DeadlineAddedToTaskTableAndProjectTable.resx">
+      <DependentUpon>201909030401433_DeadlineAddedToTaskTableAndProjectTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
