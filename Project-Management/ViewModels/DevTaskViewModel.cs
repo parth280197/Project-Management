@@ -1,4 +1,5 @@
 ﻿using Project_Management.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -23,5 +24,7 @@ namespace Project_Management.ViewModels
     public Priority Priority { get; set; }
     [Required]
     public string Note { get; set; }
+    [Required]
+    public DateTime Deadline { get; set; }
   }
 }

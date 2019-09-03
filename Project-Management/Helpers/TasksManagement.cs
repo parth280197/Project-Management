@@ -62,6 +62,7 @@ namespace Project_Management.Helpers
         taskInDb.Name = task.Name;
         taskInDb.ProjectId = task.ProjectId;
         taskInDb.CompletedPercentage = task.CompletedPercentage;
+        taskInDb.Deadline = task.Deadline;
         taskInDb.Priority = task.Priority;
         List<User> users = new List<User>();
         foreach (string developerId in selectedUsers)
@@ -131,7 +132,9 @@ namespace Project_Management.Helpers
         Name = task.Name,
         Description = task.Description,
         ProjectId = task.ProjectId,
-        CompletedPercentage = task.CompletedPercentage
+        CompletedPercentage = task.CompletedPercentage,
+        Priority = task.Priority,
+        Deadline = task.Deadline,
       };
       return devTaskViewModel;
     }
@@ -140,7 +143,6 @@ namespace Project_Management.Helpers
     {
       var taskInDb = db.Tasks.Find(devTaskViewModel.Id);
       taskInDb.CompletedPercentage = devTaskViewModel.CompletedPercentage;
-      taskInDb.Priority = devTaskViewModel.Priority;
       var note = new Notes()
       {
         Comment = devTaskViewModel.Note,

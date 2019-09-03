@@ -33,18 +33,18 @@
     </div>
   </div>
 
+
   <div class="form-group">
-    @Html.LabelFor(model => model.CompletedPercentage, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-10">
-      @Html.EditorFor(model => model.CompletedPercentage, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.CompletedPercentage, "", new { @class = "text-danger" })
+      @Html.TextBoxFor(model => model.Deadline, "{0:d MMM yyyy}", new { @class = "form-control datepicker", disabled = "disabled", @readonly = "readonly" })
+      @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
     </div>
   </div>
-
   <div class="form-group">
     @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-10">
-      @Html.EnumDropDownListFor(model => model.Priority, new { @class = "form-control" })
+      @Html.EnumDropDownListFor(model => model.Priority, new { @class = "form-control", disabled = "disabled", @readonly = "readonly" })
       @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
     </div>
   </div>
@@ -54,6 +54,13 @@
     <div class="col-md-10">
       @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
       @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+    </div>
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(model => model.CompletedPercentage, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+      @Html.EditorFor(model => model.CompletedPercentage, new { htmlAttributes = new { @class = "form-control" } })
+      @Html.ValidationMessageFor(model => model.CompletedPercentage, "", new { @class = "text-danger" })
     </div>
   </div>
   <div class="form-group">
