@@ -177,6 +177,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\NotesManagement.cs" />
+    <Compile Include="Helpers\NotificationManagement.cs" />
     <Compile Include="Helpers\ProjectManagement.cs" />
     <Compile Include="Helpers\RoleManagement.cs" />
     <Compile Include="Helpers\TasksManagement.cs" />
@@ -212,6 +213,10 @@
     <Compile Include="Migrations\201909031728203_NotificationTableAdded.cs" />
     <Compile Include="Migrations\201909031728203_NotificationTableAdded.Designer.cs">
       <DependentUpon>201909031728203_NotificationTableAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909031859186_UserTaskAndProjectAddedInNotificationTable.cs" />
+    <Compile Include="Migrations\201909031859186_UserTaskAndProjectAddedInNotificationTable.Designer.cs">
+      <DependentUpon>201909031859186_UserTaskAndProjectAddedInNotificationTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -368,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909031728203_NotificationTableAdded.resx">
       <DependentUpon>201909031728203_NotificationTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909031859186_UserTaskAndProjectAddedInNotificationTable.resx">
+      <DependentUpon>201909031859186_UserTaskAndProjectAddedInNotificationTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

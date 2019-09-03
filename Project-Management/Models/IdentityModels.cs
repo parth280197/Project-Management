@@ -12,6 +12,7 @@ namespace Project_Management.Models
   // You can add profile data for the user by adding more properties to your User class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
   public class User : IdentityUser
   {
+    public static User Identity { get; internal set; }
     [Required]
     public string Name { get; set; }
     [Required]
@@ -98,6 +99,8 @@ namespace Project_Management.Models
     public int Id { get; set; }
     public string Detail { get; set; }
     public User User { get; set; }
+    public UserTask Task { get; set; }
+    public Project Project { get; set; }
     public DateTime Time { get; set; }
     public bool IsOpened { get; set; }
   }

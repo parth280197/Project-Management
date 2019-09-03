@@ -11,10 +11,12 @@ namespace Project_Management.Helpers
   {
     private ApplicationDbContext db;
     private ProjectManagement projectManagement;
+    private NotificationManagement notificationManagement;
     public TasksManagement()
     {
       db = new ApplicationDbContext();
       projectManagement = new ProjectManagement(db);
+      notificationManagement = new NotificationManagement(db);
     }
     public List<UserTask> GetUserTasks(int projectId, string userId)
     {
@@ -163,7 +165,8 @@ namespace Project_Management.Helpers
       var tasks = GetUserTasks(projectId, userId);
       DateTime tommorowDate = DateTime.Now.AddDays(1);
       //get all task with difference between tommorow date and deadline is 1 or lessthen 1.
-      var notofocationTasks = tasks.Where(t => (tommorowDate.Day - t.Deadline.Day) <= 1).ToList();
+      var notificationTasks = tasks.Where(t => (tommorowDate.Day - t.Deadline.Day) <= 1).ToList();
+      notificationManagement.AddNotification(notificationTasks);
       return true;
     }
   }
