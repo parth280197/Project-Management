@@ -46,6 +46,8 @@ namespace Project_Management.Models
     [Required]
     public Priority Priority { get; set; }
     [Required]
+    [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+
     public DateTime Deadline { get; set; }
     public virtual ICollection<UserTask> Tasks { get; set; }
   }
@@ -70,6 +72,8 @@ namespace Project_Management.Models
     [Required]
     public Priority Priority { get; set; }
     [Required]
+    [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+
     public DateTime Deadline { get; set; }
     public virtual ICollection<User> Users { get; set; }
     [Required]

@@ -11,41 +11,47 @@
 {
   @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-  <h4>Project</h4>
-  <hr />
-  @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-  <div class="form-group">
-    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-      @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+  <div class="form-horizontal">
+    <h4>Project</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+      @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-      @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-      @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+    <div class="form-group">
+      @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+      </div>
     </div>
-  </div>
+    <div class="form-group">
+      @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Deadline,"{0:d MMM yyyy}", new { @class = "form-control datepicker" ,@Value=""})
+        @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+      </div>
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
+      <div class="col-md-10">
+        @Html.EnumDropDownListFor(model => model.Priority, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+      </div>
+    </div>
 
-  <div class="form-group">
-    @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-      @Html.EnumDropDownListFor(model => model.Priority,new { @class = "form-control" } )
-      @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="@ViewBag.Action" class="btn btn-default" />
+        @Html.HiddenFor(model => model.Id)
+      </div>
     </div>
   </div>
-
-  <div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-      <input type="submit" value="@ViewBag.Action" class="btn btn-default" />
-      @Html.HiddenFor(model => model.Id)
-    </div>
-  </div>
-</div>
 
   <div>
     @Html.ActionLink("Back to List", "List")
@@ -54,5 +60,21 @@
 
 
 @section Scripts {
-  @Scripts.Render("~/bundles/jqueryval")
-}
+
+  @Scripts.Render("~/bundles/jqueryui")
+  @Styles.Render("~/Content/cssjqryUi")
+  @Scripts.Render("~/bundles/jqueryval");
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.datepicker').datepicker({
+        dateFormat: "d M yy",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "-60:+0"
+      });
+
+    });
+  </script>
+
+}  

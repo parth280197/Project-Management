@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace Project_Management
 {
@@ -25,6 +24,12 @@ namespace Project_Management
       bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/site.css"));
+      //jqueryUI
+      bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+          "~/Scripts/jquery-ui-{version}.js"));
+      //css  
+      bundles.Add(new StyleBundle("~/Content/cssjqryUi").Include(
+             "~/Content/themes/base/jquery-ui.css"));
     }
   }
 }

@@ -31,6 +31,7 @@ namespace Project_Management.Helpers
         projectIndb.Priority = project.Priority;
         projectIndb.Name = project.Name;
         projectIndb.Description = project.Description;
+        projectIndb.Deadline = project.Deadline;
         db.SaveChanges();
         return true;
       }
