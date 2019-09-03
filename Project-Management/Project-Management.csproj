@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201909030401433_DeadlineAddedToTaskTableAndProjectTable.Designer.cs">
       <DependentUpon>201909030401433_DeadlineAddedToTaskTableAndProjectTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909031728203_NotificationTableAdded.cs" />
+    <Compile Include="Migrations\201909031728203_NotificationTableAdded.Designer.cs">
+      <DependentUpon>201909031728203_NotificationTableAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -361,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909030401433_DeadlineAddedToTaskTableAndProjectTable.resx">
       <DependentUpon>201909030401433_DeadlineAddedToTaskTableAndProjectTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909031728203_NotificationTableAdded.resx">
+      <DependentUpon>201909031728203_NotificationTableAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

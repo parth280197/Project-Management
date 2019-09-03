@@ -93,6 +93,14 @@ namespace Project_Management.Models
     public virtual User User { get; set; }
 
   }
+  public class Notification
+  {
+    public int Id { get; set; }
+    public string Detail { get; set; }
+    public User User { get; set; }
+    public DateTime Time { get; set; }
+    public bool IsOpened { get; set; }
+  }
   public enum PersonType
   {
     ProjectManager,
@@ -109,6 +117,8 @@ namespace Project_Management.Models
   {
     public DbSet<Project> Projects { get; set; }
     public DbSet<UserTask> Tasks { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
+    public DbSet<Notes> Notes { get; set; }
     public ApplicationDbContext()
         : base("DefaultConnection", throwIfV1Schema: false)
     {
@@ -119,6 +129,6 @@ namespace Project_Management.Models
       return new ApplicationDbContext();
     }
 
-    public System.Data.Entity.DbSet<Project_Management.Models.Notes> Notes { get; set; }
+
   }
 }
