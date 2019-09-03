@@ -158,5 +158,13 @@ namespace Project_Management.Helpers
       var task = db.Tasks.Find(taskId);
       return task;
     }
+    public bool CheckDeadlines(int projectId, string userId)
+    {
+      var tasks = GetUserTasks(projectId, userId);
+      DateTime tommorowDate = DateTime.Now.AddDays(1);
+      //get all task with difference between tommorow date and deadline is 1 or lessthen 1.
+      var notofocationTasks = tasks.Where(t => (tommorowDate.Day - t.Deadline.Day) <= 1).ToList();
+      return true;
+    }
   }
 }

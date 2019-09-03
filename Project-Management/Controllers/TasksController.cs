@@ -26,28 +26,19 @@ namespace Project_Management.Controllers
       return View(tasksManagement.GetUserTasks(projectId, User.Identity.GetUserId()).OrderByDescending(t => t.Priority));
 
     }
+
     [Authorize(Roles = "ProjectManager,Developer")]
     public ActionResult ListByPriority(int projectId)
     {
       ViewBag.ProjectId = projectId;
+      tasksManagement.CheckDeadlines(projectId, User.Identity.GetUserId());
       if (User.IsInRole("ProjectManager"))
         return View("List", db.Projects.Find(projectId).Tasks.OrderByDescending(t => t.Priority).ToList());
       return View("List", tasksManagement.GetUserTasks(projectId, User.Identity.GetUserId()).OrderByDescending(t => t.Priority));
 
     }
+
     [Authorize(Roles = "ProjectManager")]
-    public ActionResult CreateOrUpdate(int projectId)
-    {
-      UserTaskFormViewModel userTaskFormViewModel = new ViewModels.UserTaskFormViewModel();
-      userTaskFormViewModel.Task.ProjectId = projectId;
-      userTaskFormViewModel.UsersList = db.Users.Where(u => u.PersonType == PersonType.Developer)
-        .Select(u => new SelectListItem
-        {
-          Text = u.Name,
-          Value = u.Id
-        });
-      return View("TasksForm", userTaskFormViewModel);
-    }
     [HttpPost]
     public ActionResult CreateOrUpdate(UserTaskFormViewModel userTaskFormViewModel)
     {
@@ -62,15 +53,29 @@ namespace Project_Management.Controllers
           tasksManagement.UpdateTask(userTaskFormViewModel);
         }
       }
-      return RedirectToAction("List", new { id = userTaskFormViewModel.Task.ProjectId });
+      return RedirectToAction("List", new { projectId = userTaskFormViewModel.Task.ProjectId });
     }
+    public ActionResult CreateOrUpdate(int projectId)
+    {
+      UserTaskFormViewModel userTaskFormViewModel = new ViewModels.UserTaskFormViewModel();
+      userTaskFormViewModel.Task.ProjectId = projectId;
+      userTaskFormViewModel.UsersList = db.Users.Where(u => u.PersonType == PersonType.Developer)
+        .Select(u => new SelectListItem
+        {
+          Text = u.Name,
+          Value = u.Id
+        });
+      return View("TasksForm", userTaskFormViewModel);
+    }
+
     [Authorize(Roles = "ProjectManager,Developer")]
-    public ActionResult Edit(int id)
+    public ActionResult Edit(int taskId)
     {
       if (User.IsInRole("ProjectManager"))
-        return View("TasksForm", tasksManagement.LoadViewModel(id));
-      return View("DevTaskForm", tasksManagement.LoadDevViewModel(id));
+        return View("TasksForm", tasksManagement.LoadViewModel(taskId));
+      return View("DevTaskForm", tasksManagement.LoadDevViewModel(taskId));
     }
+
     [Authorize(Roles = "Developer")]
     public ActionResult DevUpdateTask(DevTaskViewModel devTaskViewModel)
     {

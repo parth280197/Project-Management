@@ -59,7 +59,7 @@
         @Html.ValidationMessageFor(model => model.SelectedId, "", new { @class = "text-danger" })
       </div>
     </div>
-
+    @Model.Task.ProjectId
     <div class="form-group">
       @Html.HiddenFor(model => model.Task.Id)
       @Html.HiddenFor(model => model.Task.ProjectId)
