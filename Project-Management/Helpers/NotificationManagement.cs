@@ -12,7 +12,12 @@ namespace Project_Management.Helpers
     {
       this.db = db;
     }
-    public void AddNotification(List<UserTask> tasks)
+    public List<Notification> GetNotifications(User user)
+    {
+      var notifications = db.Notifications.Where(n => n.User.Id == user.Id).ToList();
+      return notifications;
+    }
+    public void AddNotification(List<UserTask> tasks, string userId)
     {
       foreach (var task in tasks)
       {
@@ -26,7 +31,7 @@ namespace Project_Management.Helpers
         }
         if (addFlag)
         {
-          var user = db.Users.Find(User.Identity.Id);
+          var user = db.Users.Find(userId);
           Notification notification = new Notification()
           {
             Detail = task.Name + "is pending complete it before" + task.Deadline,
@@ -34,7 +39,7 @@ namespace Project_Management.Helpers
             Task = task,
             Project = task.Project,
             Time = DateTime.Now,
-            User = User.Identity,
+            User = user,
           };
 
           db.Notifications.Add(notification);

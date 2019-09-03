@@ -166,7 +166,7 @@ namespace Project_Management.Helpers
       DateTime tommorowDate = DateTime.Now.AddDays(1);
       //get all task with difference between tommorow date and deadline is 1 or lessthen 1.
       var notificationTasks = tasks.Where(t => (tommorowDate.Day - t.Deadline.Day) <= 1).ToList();
-      notificationManagement.AddNotification(notificationTasks);
+      notificationManagement.AddNotification(notificationTasks,userId);
       return true;
     }
   }
