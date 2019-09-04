@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace Project_Management.Controllers
 {
-  [Authorize]
   public class AccountController : Controller
   {
     private ApplicationSignInManager _signInManager;
@@ -138,7 +137,6 @@ namespace Project_Management.Controllers
 
     //
     // GET: /Account/Register
-    [Authorize(Roles = "Admin")]
     public ActionResult Register()
     {
       return View();

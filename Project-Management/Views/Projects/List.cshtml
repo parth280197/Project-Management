@@ -64,6 +64,7 @@
         @if (User.IsInRole("ProjectManager"))
         {
           @Html.ActionLink("Edit", "Edit", new { projectId = item.Id })
+          @Html.ActionLink("Delete", "Delete", new { projectId = item.Id })
         }
         @Html.ActionLink("Tasks", "List", "Tasks", new { projectId = item.Id }, null)
       </td>

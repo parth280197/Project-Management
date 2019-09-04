@@ -58,7 +58,15 @@ namespace Project_Management.Controllers
 
     [Authorize(Roles = "ProjectManager,Developer")]
     #endregion
+    #region Delete actions
+    public ActionResult Delete(int projectId)
+    {
+      projectManagement.DeleteProject(projectId);
+      return RedirectToAction("List");
+    }
+    #endregion
     #region List
+    [Authorize(Roles = "ProjectManager,Developer")]
     public ActionResult List()
     {
       //CheckDeadline checks for those tasks whoes deadline is tommorow and add it in notification table if previously not added.

@@ -48,7 +48,6 @@ namespace Project_Management.Helpers
       project.CompletedPercentage = Math.Round(completedWork);
       db.SaveChanges();
     }
-
     public List<Project> GetUsersProject(User user)
     {
       var projects = new HashSet<Project>();
@@ -60,6 +59,21 @@ namespace Project_Management.Helpers
         }
       }
       return projects.ToList();
+    }
+    public bool DeleteProject(int projectId)
+    {
+      var project = db.Projects.Find(projectId);
+      var taskInProject = project.Tasks.ToList();
+      foreach (var task in taskInProject)
+      {
+        db.Notes.RemoveRange(task.Notes);
+        db.SaveChanges();
+        db.Tasks.Remove(task);
+        db.SaveChanges();
+      }
+      db.Projects.Remove(project);
+      db.SaveChanges();
+      return true;
     }
   }
 }
