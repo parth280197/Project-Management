@@ -6,10 +6,12 @@
 }
 
 <h2>List of tasks</h2>
-
-<p>
-  @Html.ActionLink("Create", "Create", new { projectId = ViewBag.ProjectId })
-</p>
+@if (User.IsInRole("ProjectManger"))
+{
+  <p>
+    @Html.ActionLink("Create", "Create", new { projectId = ViewBag.ProjectId })
+  </p>
+}
 <p>
   @Html.ActionLink("Order by completed work", "List", new { projectId = ViewBag.ProjectId })
 </p>

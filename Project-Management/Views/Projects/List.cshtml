@@ -7,9 +7,13 @@
 
 <h2>Projects</h2>
 
-<p>
-  @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("ProjectManager"))
+{
+  <p>
+    @Html.ActionLink("Create New", "Create")
+  </p>
+}
+
 <p>
   @Html.ActionLink("Order by completed work", "List")
 </p>
