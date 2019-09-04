@@ -80,7 +80,7 @@ namespace Project_Management.Controllers
     [Authorize(Roles = "ProjectManager,Developer")]
     public ActionResult Edit(int taskId)
     {
-      ViewBag.Action = "Create";
+      ViewBag.Action = "Update";
 
       if (User.IsInRole("ProjectManager"))
         return View("TasksForm", tasksManagement.LoadViewModel(taskId));

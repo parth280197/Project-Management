@@ -56,14 +56,11 @@ namespace Project_Management.Helpers
     {
       var task = userTaskFormView.Task;
       task.Project = db.Projects.Find(task.ProjectId);
-      var selectedUsers = userTaskFormView.SelectedId;
+      var selectedUsersId = userTaskFormView.SelectedId;
 
       if (task != null)
       {
         var taskInDb = db.Tasks.Find(task.Id);
-
-        //updateFlag: keep track that update users in task only if required
-        bool updateFlag = false;
 
         taskInDb.Name = task.Name;
         taskInDb.ProjectId = task.ProjectId;
@@ -71,46 +68,46 @@ namespace Project_Management.Helpers
         taskInDb.Deadline = task.Deadline;
         taskInDb.Priority = task.Priority;
 
-        List<User> users = new List<User>();
+        List<User> selectedUsers = new List<User>();
         //Get all selected users from view model
-        foreach (string developerId in selectedUsers)
+        foreach (string developerId in selectedUsersId)
         {
           var user = db.Users.Find(developerId);
-          users.Add(user);
+          selectedUsers.Add(user);
         }
 
-        //remove all user which were part of task in past but now they are removed from task
+        //Get all users to remove in removed list
+        List<User> removedUsers = new List<User>();
         foreach (User user in taskInDb.Users)
         {
-          if (!users.Contains(user))
+          if (!selectedUsers.Contains(user))
           {
-            users.Remove(user);
-            updateFlag = true;
+            removedUsers.Add(user);
           }
         }
+
+        //Remove it from task
+        foreach (var user in removedUsers)
+        {
+          taskInDb.Users.Remove(user);
+          db.SaveChanges();
+        }
+
 
         //add all new user selected from view model
-        foreach (string developerId in selectedUsers)
+        foreach (var user in selectedUsers)
         {
-          var user = db.Users.Find(developerId);
           if (!taskInDb.Users.Contains(user))
           {
-            users.Add(user);
-            updateFlag = true;
+            taskInDb.Users.Add(user);
           }
-        }
-
-        //update if any change in user list for perticulat task
-        if (updateFlag)
-        {
-          taskInDb.Users = users;
         }
         db.SaveChanges();
 
-        projectManagement.UpdateCompletedWork(task.Project);
+        projectManagement.UpdateCompletedWork(taskInDb.Project);
         if (task.CompletedPercentage == 100)
         {
-          notificationManagement.AddCompletedNotification(task, NotificationType.Completed);
+          notificationManagement.AddCompletedNotification(taskInDb, NotificationType.Completed);
         }
         return true;
       }
@@ -130,6 +127,7 @@ namespace Project_Management.Helpers
           Description = task.Description,
           ProjectId = task.ProjectId,
           CompletedPercentage = task.CompletedPercentage,
+          Deadline = task.Deadline,
           Priority = task.Priority,
         },
         UsersList = db.Users.Where(u => u.PersonType == PersonType.Developer)
