@@ -18,9 +18,9 @@ namespace Project_Management.Controllers
       tasksManagement = new TasksManagement(db);
     }
     // GET: Projects
-    [Authorize(Roles = "ProjectManager")]
     [HttpGet]
     [Authorize(Roles = "ProjectManager")]
+    #region Create and Update actions
     public ActionResult Create()
     {
       ViewBag.Action = "Create";
@@ -57,6 +57,8 @@ namespace Project_Management.Controllers
     }
 
     [Authorize(Roles = "ProjectManager,Developer")]
+    #endregion
+    #region List
     public ActionResult List()
     {
       //CheckDeadline checks for those tasks whoes deadline is tommorow and add it in notification table if previously not added.
@@ -81,5 +83,6 @@ namespace Project_Management.Controllers
       return View("List", projectManagement.GetUsersProject(db.Users.Find(User.Identity.GetUserId())).OrderByDescending(p => p.Priority));
 
     }
+    #endregion
   }
 }

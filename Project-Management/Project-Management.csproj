@@ -182,6 +182,7 @@
     <Compile Include="Helpers\ProjectManagement.cs" />
     <Compile Include="Helpers\RoleManagement.cs" />
     <Compile Include="Helpers\TasksManagement.cs" />
+    <Compile Include="Helpers\UiHelper.cs" />
     <Compile Include="Helpers\UserManagement.cs" />
     <Compile Include="Migrations\201908280544365_Initial.cs" />
     <Compile Include="Migrations\201908280544365_Initial.Designer.cs">

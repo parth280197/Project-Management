@@ -1,19 +1,20 @@
-﻿@model IEnumerable<Project_Management.Models.Project>
+﻿@using Project_Management.Helpers
+@model IEnumerable<Project_Management.Models.Project>
 
 @{
-    ViewBag.Title = "List";
+  ViewBag.Title = "List";
 }
 
 <h2>Projects</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+  @Html.ActionLink("Create New", "Create")
 </p>
 <p>
   @Html.ActionLink("Order by completed work", "List")
 </p>
 <p>
-  @Html.ActionLink("Order by priority", "ListByPriority","Projects")
+  @Html.ActionLink("Order by priority", "ListByPriority", "Projects")
 </p>
 <table class="table table-bordered">
   <tr>
@@ -38,34 +39,35 @@
 
   </tr>
 
-@foreach (var item in Model) {
-<tr>
-  <td>
-    @Html.DisplayFor(modelItem => item.Name)
-  </td>
-  <td>
-    @Html.DisplayFor(modelItem => item.Description)
-  </td>
-  <td>
-    <div class="progress">
-      <div class="progress-bar bg-success" role="progressbar" style="width: @item.CompletedPercentage%" aria-valuenow="@item.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@item.CompletedPercentage</div>
-    </div>
-  </td>
-  <td>
-    @Html.DisplayFor(modelItem => item.Priority)
-  </td>
-  <td>
-    @Html.DisplayFor(modelItem => item.Deadline,"{0:d MMM yyyy}")
-  </td>
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>
+        @Html.DisplayFor(modelItem => item.Name)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Description)
+      </td>
+      <td>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped @(UiHelper.ClassSelector(item.CompletedPercentage))" role="progressbar" style="width: @item.CompletedPercentage%" aria-valuenow="@item.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@item.CompletedPercentage</div>
+        </div>
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Priority)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Deadline, "{0:d MMM yyyy}")
+      </td>
 
-  <td>
-    @if (User.IsInRole("ProjectManager"))
-    {
-      @Html.ActionLink("Edit", "Edit", new { projectId = item.Id })
-    }
-    @Html.ActionLink("Tasks", "List", "Tasks", new { projectId = item.Id }, null)
-  </td>
-</tr>
-}
+      <td>
+        @if (User.IsInRole("ProjectManager"))
+        {
+          @Html.ActionLink("Edit", "Edit", new { projectId = item.Id })
+        }
+        @Html.ActionLink("Tasks", "List", "Tasks", new { projectId = item.Id }, null)
+      </td>
+    </tr>
+  }
 
 </table>
