@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Project_Management.Models.UserTask>
+﻿@using Project_Management.Helpers
+@model IEnumerable<Project_Management.Models.UserTask>
 
 @{
   ViewBag.Title = "List";
@@ -57,7 +58,7 @@
       </td>
       <td>
         <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: @item.CompletedPercentage%" aria-valuenow="@item.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@item.CompletedPercentage</div>
+          <div class="progress-bar progress-bar-striped @(UiHelper.ClassSelector(item.CompletedPercentage))" role="progressbar" style="width: @item.CompletedPercentage%" aria-valuenow="@item.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@item.CompletedPercentage</div>
         </div>
       </td>
       <td>
