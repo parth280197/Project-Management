@@ -177,7 +177,7 @@ namespace Project_Management.Helpers
         notificationTasks = user.Tasks.Where(t => (tommorowDate.Day - t.Deadline.Day) <= 1).ToList();
       }
 
-      notificationManagement.AddNotification(notificationTasks, userId);
+      notificationManagement.AddNotification(notificationTasks, userId, NotificationType.Incompleted);
       return true;
     }
   }

@@ -219,6 +219,10 @@
     <Compile Include="Migrations\201909031859186_UserTaskAndProjectAddedInNotificationTable.Designer.cs">
       <DependentUpon>201909031859186_UserTaskAndProjectAddedInNotificationTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909040536463_NotificationTypeAddedInNotificationTable.cs" />
+    <Compile Include="Migrations\201909040536463_NotificationTypeAddedInNotificationTable.Designer.cs">
+      <DependentUpon>201909040536463_NotificationTypeAddedInNotificationTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -334,6 +338,7 @@
     <Content Include="Views\Tasks\DevTaskForm.cshtml" />
     <Content Include="Views\Notes\List.cshtml" />
     <Content Include="Views\Notifications\List.cshtml" />
+    <Content Include="Views\Tasks\ListIncompleteTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -378,6 +383,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909031859186_UserTaskAndProjectAddedInNotificationTable.resx">
       <DependentUpon>201909031859186_UserTaskAndProjectAddedInNotificationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909040536463_NotificationTypeAddedInNotificationTable.resx">
+      <DependentUpon>201909040536463_NotificationTypeAddedInNotificationTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

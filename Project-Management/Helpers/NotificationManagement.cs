@@ -36,7 +36,7 @@ namespace Project_Management.Helpers
         db.SaveChanges();
       }
     }
-    public void AddNotification(List<UserTask> tasks, string userId)
+    public void AddNotification(List<UserTask> tasks, string userId, NotificationType notificationType)
     {
       foreach (var task in tasks)
       {
@@ -44,7 +44,7 @@ namespace Project_Management.Helpers
         var notifications = db.Notifications.ToList();
         foreach (var notification in notifications)
         {
-          if (notification.Task.Id == task.Id && notification.User.Id == userId)
+          if (notification.Task.Id == task.Id && notification.User.Id == userId && notification.NotificationType == notificationType)
           {
             addFlag = false;
           }
@@ -60,6 +60,7 @@ namespace Project_Management.Helpers
             Project = task.Project,
             Time = DateTime.Now,
             User = user,
+            NotificationType = notificationType,
           };
 
           db.Notifications.Add(notification);

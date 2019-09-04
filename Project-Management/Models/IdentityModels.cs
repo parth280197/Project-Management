@@ -103,7 +103,13 @@ namespace Project_Management.Models
     public virtual Project Project { get; set; }
     [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
     public DateTime Time { get; set; }
+    public NotificationType NotificationType { get; set; }
     public bool IsOpened { get; set; }
+  }
+  public enum NotificationType
+  {
+    Incompleted,
+    Completed,
   }
   public enum PersonType
   {

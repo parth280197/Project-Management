@@ -2,6 +2,7 @@
 using Project_Management.Helpers;
 using Project_Management.Models;
 using Project_Management.ViewModels;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -24,7 +25,12 @@ namespace Project_Management.Controllers
       if (User.IsInRole("ProjectManager"))
         return View(db.Projects.Find(projectId).Tasks.OrderByDescending(t => t.CompletedPercentage).ToList());
       return View(tasksManagement.GetUserTasks(projectId, User.Identity.GetUserId()).OrderByDescending(t => t.Priority));
+    }
 
+    [Authorize(Roles = "ProjectManager")]
+    public ActionResult ListIncompleteTask()
+    {
+      return View(db.Tasks.Where(t => t.CompletedPercentage < 100 && t.Deadline < DateTime.Now).ToList());
     }
 
     [Authorize(Roles = "ProjectManager,Developer")]
