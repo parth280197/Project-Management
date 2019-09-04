@@ -55,8 +55,10 @@ namespace Project_Management.Controllers
       }
       return RedirectToAction("List", new { projectId = userTaskFormViewModel.Task.ProjectId });
     }
-    public ActionResult CreateOrUpdate(int projectId)
+    public ActionResult Create(int projectId)
     {
+      ViewBag.Action = "Create";
+
       UserTaskFormViewModel userTaskFormViewModel = new ViewModels.UserTaskFormViewModel();
       userTaskFormViewModel.Task.ProjectId = projectId;
       userTaskFormViewModel.UsersList = db.Users.Where(u => u.PersonType == PersonType.Developer)
@@ -65,14 +67,18 @@ namespace Project_Management.Controllers
           Text = u.Name,
           Value = u.Id
         });
+
       return View("TasksForm", userTaskFormViewModel);
     }
 
     [Authorize(Roles = "ProjectManager,Developer")]
     public ActionResult Edit(int taskId)
     {
+      ViewBag.Action = "Create";
+
       if (User.IsInRole("ProjectManager"))
         return View("TasksForm", tasksManagement.LoadViewModel(taskId));
+
       return View("DevTaskForm", tasksManagement.LoadDevViewModel(taskId));
     }
 

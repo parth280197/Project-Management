@@ -15,6 +15,12 @@ namespace Project_Management.Helpers
     public List<Notification> GetNotifications(User user)
     {
       var notifications = db.Notifications.Where(n => n.User.Id == user.Id && !n.IsOpened).ToList();
+
+      return notifications;
+    }
+    public List<Notification> GetAllNotifications(User user)
+    {
+      var notifications = db.Notifications.Where(n => n.User.Id == user.Id).ToList();
       if (notifications.Count > 0)
       {
         MarkNotificationRead(notifications);
@@ -35,9 +41,10 @@ namespace Project_Management.Helpers
       foreach (var task in tasks)
       {
         bool addFlag = true;
-        foreach (var notification in db.Notifications.ToList())
+        var notifications = db.Notifications.ToList();
+        foreach (var notification in notifications)
         {
-          if (notification.Task.Id == task.Id)
+          if (notification.Task.Id == task.Id && notification.User.Id == userId)
           {
             addFlag = false;
           }

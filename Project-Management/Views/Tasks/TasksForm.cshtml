@@ -4,14 +4,13 @@
   ViewBag.Title = "CreateOrUpdate";
 }
 
-<h2>CreateOrUpdate</h2>
+<h2>@ViewBag.Action Task</h2>
 
 @using (Html.BeginForm("CreateOrUpdate", "Tasks"))
 {
   @Html.AntiForgeryToken()
 
   <div class="form-horizontal">
-    <h4>UserTask</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -40,7 +39,15 @@
     <div class="form-group">
       @Html.LabelFor(model => model.Task.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
       <div class="col-md-10">
-        @Html.TextBoxFor(model => model.Task.Deadline, "{0:d MMM yyyy}", new { @class = "form-control datepicker", @Value = "" })
+        @if (ViewBag.Action == "Create")
+        {
+          @Html.TextBoxFor(model => model.Task.Deadline, "{0:d MMM yyyy}", new { @class = "form-control datepicker", @Value = "" })
+        }
+        else
+        {
+          @Html.TextBoxFor(model => model.Task.Deadline, "{0:d MMM yyyy}", new { @class = "form-control datepicker"})
+        }
+
         @Html.ValidationMessageFor(model => model.Task.Deadline, "", new { @class = "text-danger" })
       </div>
     </div>
@@ -71,7 +78,7 @@
 }
 
 <div>
-  @Html.ActionLink("Back to List", "List", new { id = Model.Task.ProjectId })
+  @Html.ActionLink("Back to Project", "List", new { id = Model.Task.ProjectId })
 </div>
 
 @section Scripts {

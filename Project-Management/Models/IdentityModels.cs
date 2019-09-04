@@ -98,9 +98,9 @@ namespace Project_Management.Models
   {
     public int Id { get; set; }
     public string Detail { get; set; }
-    public User User { get; set; }
-    public UserTask Task { get; set; }
-    public Project Project { get; set; }
+    public virtual User User { get; set; }
+    public virtual UserTask Task { get; set; }
+    public virtual Project Project { get; set; }
     [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
     public DateTime Time { get; set; }
     public bool IsOpened { get; set; }

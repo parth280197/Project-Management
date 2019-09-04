@@ -18,7 +18,14 @@ namespace Project_Management.Controllers
     public ActionResult List()
     {
       var notifications = notificationManagement.GetNotifications(db.Users.Find(User.Identity.GetUserId()));
+      notificationManagement.MarkNotificationRead(notifications);
       return View(notifications);
+    }
+    public ActionResult OpenedList()
+    {
+      var notifications = notificationManagement.GetAllNotifications(db.Users.Find(User.Identity.GetUserId()));
+      notificationManagement.MarkNotificationRead(notifications);
+      return View("List", notifications);
     }
   }
 }

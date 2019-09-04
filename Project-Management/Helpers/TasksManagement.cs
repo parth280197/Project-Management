@@ -163,20 +163,20 @@ namespace Project_Management.Helpers
     public bool CheckDeadlines(string userId)
     {
       var user = db.Users.Find(userId);
+      var notificationTasks = new List<UserTask>();
 
-      var tasks = new List<UserTask>();
       if (user.PersonType == PersonType.ProjectManager)
       {
-        tasks = db.Tasks.ToList();
+        //get list of the tasks that are not finished yet and passed their deadline. 
+        notificationTasks = db.Tasks.Where(t => t.Deadline < DateTime.Now && t.CompletedPercentage < 100).ToList();
       }
       else
       {
-        tasks = user.Tasks.ToList();
+        //get all task with difference between tommorow date and deadline is 1 or lessthen 1.
+        DateTime tommorowDate = DateTime.Now.AddDays(1);
+        notificationTasks = user.Tasks.Where(t => (tommorowDate.Day - t.Deadline.Day) <= 1).ToList();
       }
 
-      DateTime tommorowDate = DateTime.Now.AddDays(1);
-      //get all task with difference between tommorow date and deadline is 1 or lessthen 1.
-      var notificationTasks = tasks.Where(t => (tommorowDate.Day - t.Deadline.Day) <= 1).ToList();
       notificationManagement.AddNotification(notificationTasks, userId);
       return true;
     }

@@ -4,10 +4,10 @@
   ViewBag.Title = "List";
 }
 
-<h2>List</h2>
+<h2>List of tasks</h2>
 
 <p>
-  @Html.ActionLink("Create", "CreateOrUpdate", new { projectId = ViewBag.ProjectId })
+  @Html.ActionLink("Create", "Create", new { projectId = ViewBag.ProjectId })
 </p>
 <p>
   @Html.ActionLink("Order by completed work", "List", new { projectId = ViewBag.ProjectId })
@@ -45,40 +45,38 @@
 
   @foreach (var item in Model)
   {
-<tr>
-  <td>
-    @Html.DisplayFor(modelItem => item.Project.Name)
-  </td>
-  <td>
-    @Html.DisplayFor(modelItem => item.Name)
-  </td>
-  <td>
-    @Html.DisplayFor(modelItem => item.Description)
-  </td>
-  <td>
-    <div class="progress">
-      <div class="progress-bar bg-success" role="progressbar" style="width: @item.CompletedPercentage%" aria-valuenow="@item.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@item.CompletedPercentage</div>
-    </div>
-  </td>
-  <td>
-    @Html.DisplayFor(modelItem => item.Priority)
-  </td>
-  <td>
-    @Html.DisplayFor(modelItem => item.Deadline, "{0:d MMM yyyy}")
-  </td>
-  <td>
-    @foreach (var user in item.Users)
-    {
-      <div>@user.Name</div>
-    }
-  </td>
-  <td>
-    @Html.ActionLink("Update", "Edit", new { taskId = item.Id })
-    @Html.ActionLink("Notes", "List", "Notes", new { id = item.Id }, null)
-    @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
-      @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-  </td>
-</tr>
+    <tr>
+      <td>
+        @Html.DisplayFor(modelItem => item.Project.Name)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Name)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Description)
+      </td>
+      <td>
+        <div class="progress">
+          <div class="progress-bar bg-success" role="progressbar" style="width: @item.CompletedPercentage%" aria-valuenow="@item.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@item.CompletedPercentage</div>
+        </div>
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Priority)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Deadline, "{0:d MMM yyyy}")
+      </td>
+      <td>
+        @foreach (var user in item.Users)
+        {
+          <div>@user.Name</div>
+        }
+      </td>
+      <td>
+        @Html.ActionLink("Update", "Edit", new { taskId = item.Id })
+        @Html.ActionLink("Notes", "List", "Notes", new { id = item.Id }, null)
+      </td>
+    </tr>
   }
 
 </table>

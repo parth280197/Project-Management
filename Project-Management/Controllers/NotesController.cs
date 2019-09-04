@@ -15,7 +15,7 @@ namespace Project_Management.Controllers
     {
       db = new ApplicationDbContext();
       noteManagement = new NotesManagement();
-      tasksManagement = new TasksManagement();
+      tasksManagement = new TasksManagement(db);
     }
     public ActionResult List(int id)
     {
