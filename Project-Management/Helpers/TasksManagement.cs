@@ -104,9 +104,12 @@ namespace Project_Management.Helpers
         }
         db.SaveChanges();
 
+        //Update completed % of work in project 
         projectManagement.UpdateCompletedWork(taskInDb.Project);
+
         if (task.CompletedPercentage == 100)
         {
+          //if task completed add notification
           notificationManagement.AddCompletedNotification(taskInDb, NotificationType.Completed);
         }
         return true;
