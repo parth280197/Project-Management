@@ -57,21 +57,29 @@ namespace Project_Management.Helpers
       var task = userTaskFormView.Task;
       task.Project = db.Projects.Find(task.ProjectId);
       var selectedUsers = userTaskFormView.SelectedId;
+
       if (task != null)
       {
         var taskInDb = db.Tasks.Find(task.Id);
+
+        //updateFlag: keep track that update users in task only if required
         bool updateFlag = false;
+
         taskInDb.Name = task.Name;
         taskInDb.ProjectId = task.ProjectId;
         taskInDb.CompletedPercentage = task.CompletedPercentage;
         taskInDb.Deadline = task.Deadline;
         taskInDb.Priority = task.Priority;
+
         List<User> users = new List<User>();
+        //Get all selected users from view model
         foreach (string developerId in selectedUsers)
         {
           var user = db.Users.Find(developerId);
           users.Add(user);
         }
+
+        //remove all user which were part of task in past but now they are removed from task
         foreach (User user in taskInDb.Users)
         {
           if (!users.Contains(user))
@@ -80,6 +88,8 @@ namespace Project_Management.Helpers
             updateFlag = true;
           }
         }
+
+        //add all new user selected from view model
         foreach (string developerId in selectedUsers)
         {
           var user = db.Users.Find(developerId);
@@ -89,12 +99,19 @@ namespace Project_Management.Helpers
             updateFlag = true;
           }
         }
+
+        //update if any change in user list for perticulat task
         if (updateFlag)
         {
           taskInDb.Users = users;
         }
         db.SaveChanges();
+
         projectManagement.UpdateCompletedWork(task.Project);
+        if (task.CompletedPercentage == 100)
+        {
+          notificationManagement.AddCompletedNotification(task, NotificationType.Completed);
+        }
         return true;
       }
       return false;
@@ -153,6 +170,11 @@ namespace Project_Management.Helpers
       };
       taskInDb.Notes.Add(note);
       db.SaveChanges();
+      if (devTaskViewModel.CompletedPercentage == 100)
+      {
+        notificationManagement.AddCompletedNotification(taskInDb, NotificationType.Completed);
+      }
+
       return false;
     }
     public UserTask GetUserTask(int taskId)

@@ -68,5 +68,39 @@ namespace Project_Management.Helpers
         }
       }
     }
+
+    public void AddCompletedNotification(UserTask task, NotificationType notificationType)
+    {
+      var projectManagers = db.Users.Where(u => u.PersonType == PersonType.ProjectManager).ToList();
+      bool addFlag = true;
+
+      foreach (var projectManager in projectManagers)
+      {
+        var notifications = db.Notifications.ToList();
+        foreach (var notification in notifications)
+        {
+          if (notification.Task.Id == task.Id && notification.User.Id == projectManager.Id && notification.NotificationType == notificationType)
+          {
+            addFlag = false;
+          }
+        }
+        if (addFlag)
+        {
+          Notification notification = new Notification()
+          {
+            Detail = task.Name + " is completed on " + DateTime.Now.ToString("d MMM yyyy"),
+            IsOpened = false,
+            Task = task,
+            Project = task.Project,
+            Time = DateTime.Now,
+            User = projectManager,
+            NotificationType = notificationType,
+          };
+
+          db.Notifications.Add(notification);
+          db.SaveChanges();
+        }
+      }
+    }
   }
 }

@@ -92,7 +92,7 @@ namespace Project_Management.Controllers
     public ActionResult DevUpdateTask(DevTaskViewModel devTaskViewModel)
     {
       tasksManagement.DevUpdateTask(devTaskViewModel, User.Identity.GetUserId());
-      return RedirectToAction("List", new { id = devTaskViewModel.ProjectId });
+      return RedirectToAction("List", new { projectId = devTaskViewModel.ProjectId });
     }
   }
 }
