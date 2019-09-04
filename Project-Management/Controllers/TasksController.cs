@@ -14,7 +14,7 @@ namespace Project_Management.Controllers
     public TasksController()
     {
       db = new ApplicationDbContext();
-      tasksManagement = new TasksManagement();
+      tasksManagement = new TasksManagement(db);
     }
     // GET: Tasks
     [Authorize(Roles = "ProjectManager,Developer")]
@@ -31,7 +31,7 @@ namespace Project_Management.Controllers
     public ActionResult ListByPriority(int projectId)
     {
       ViewBag.ProjectId = projectId;
-      tasksManagement.CheckDeadlines(projectId, User.Identity.GetUserId());
+
       if (User.IsInRole("ProjectManager"))
         return View("List", db.Projects.Find(projectId).Tasks.OrderByDescending(t => t.Priority).ToList());
       return View("List", tasksManagement.GetUserTasks(projectId, User.Identity.GetUserId()).OrderByDescending(t => t.Priority));

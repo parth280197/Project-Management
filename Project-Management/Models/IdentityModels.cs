@@ -101,6 +101,7 @@ namespace Project_Management.Models
     public User User { get; set; }
     public UserTask Task { get; set; }
     public Project Project { get; set; }
+    [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
     public DateTime Time { get; set; }
     public bool IsOpened { get; set; }
   }

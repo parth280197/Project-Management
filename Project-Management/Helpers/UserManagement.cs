@@ -17,5 +17,9 @@ namespace Project_Management.Helpers
     {
       return userManager.AddToRole(UserId, RoleName).Succeeded;
     }
+    public bool UserInRole(string userId, string roleName)
+    {
+      return userManager.IsInRole(userId, roleName);
+    }
   }
 }

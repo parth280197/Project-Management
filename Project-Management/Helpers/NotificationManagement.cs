@@ -14,8 +14,21 @@ namespace Project_Management.Helpers
     }
     public List<Notification> GetNotifications(User user)
     {
-      var notifications = db.Notifications.Where(n => n.User.Id == user.Id).ToList();
+      var notifications = db.Notifications.Where(n => n.User.Id == user.Id && !n.IsOpened).ToList();
+      if (notifications.Count > 0)
+      {
+        MarkNotificationRead(notifications);
+      }
       return notifications;
+    }
+
+    public void MarkNotificationRead(List<Notification> notifications)
+    {
+      foreach (var notification in notifications)
+      {
+        notification.IsOpened = true;
+        db.SaveChanges();
+      }
     }
     public void AddNotification(List<UserTask> tasks, string userId)
     {

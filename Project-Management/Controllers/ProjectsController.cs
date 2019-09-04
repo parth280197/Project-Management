@@ -9,11 +9,13 @@ namespace Project_Management.Controllers
   public class ProjectsController : Controller
   {
     private ProjectManagement projectManagement;
+    private TasksManagement tasksManagement;
     private ApplicationDbContext db;
     public ProjectsController()
     {
       db = new ApplicationDbContext();
       projectManagement = new ProjectManagement(db);
+      tasksManagement = new TasksManagement(db);
     }
     // GET: Projects
     [Authorize(Roles = "ProjectManager")]
@@ -57,6 +59,8 @@ namespace Project_Management.Controllers
     [Authorize(Roles = "ProjectManager,Developer")]
     public ActionResult List()
     {
+      //CheckDeadline checks for those tasks whoes deadline is tommorow and add it in notification table if previously not added.
+      tasksManagement.CheckDeadlines(User.Identity.GetUserId());
       if (User.IsInRole("ProjectManager"))
       {
         return View(db.Projects.OrderByDescending(p => p.CompletedPercentage).ToList());

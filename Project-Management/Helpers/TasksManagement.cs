@@ -12,9 +12,9 @@ namespace Project_Management.Helpers
     private ApplicationDbContext db;
     private ProjectManagement projectManagement;
     private NotificationManagement notificationManagement;
-    public TasksManagement()
+    public TasksManagement(ApplicationDbContext db)
     {
-      db = new ApplicationDbContext();
+      this.db = db;
       projectManagement = new ProjectManagement(db);
       notificationManagement = new NotificationManagement(db);
     }
@@ -160,13 +160,24 @@ namespace Project_Management.Helpers
       var task = db.Tasks.Find(taskId);
       return task;
     }
-    public bool CheckDeadlines(int projectId, string userId)
+    public bool CheckDeadlines(string userId)
     {
-      var tasks = GetUserTasks(projectId, userId);
+      var user = db.Users.Find(userId);
+
+      var tasks = new List<UserTask>();
+      if (user.PersonType == PersonType.ProjectManager)
+      {
+        tasks = db.Tasks.ToList();
+      }
+      else
+      {
+        tasks = user.Tasks.ToList();
+      }
+
       DateTime tommorowDate = DateTime.Now.AddDays(1);
       //get all task with difference between tommorow date and deadline is 1 or lessthen 1.
       var notificationTasks = tasks.Where(t => (tommorowDate.Day - t.Deadline.Day) <= 1).ToList();
-      notificationManagement.AddNotification(notificationTasks,userId);
+      notificationManagement.AddNotification(notificationTasks, userId);
       return true;
     }
   }
