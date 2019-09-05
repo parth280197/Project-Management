@@ -67,9 +67,10 @@ namespace Project_Management.Helpers
       foreach (var task in taskInProject)
       {
         db.Notes.RemoveRange(task.Notes);
-        db.SaveChanges();
         db.Tasks.Remove(task);
-        db.SaveChanges();
+
+        var notificationsToRemove = db.Notifications.Where(n => n.Task.Id == task.Id).ToList();
+        db.Notifications.RemoveRange(notificationsToRemove);
       }
       db.Projects.Remove(project);
       db.SaveChanges();

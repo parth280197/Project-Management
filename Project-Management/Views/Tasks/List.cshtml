@@ -6,7 +6,7 @@
 }
 
 <h2>List of tasks</h2>
-@if (User.IsInRole("ProjectManger"))
+@if (User.IsInRole("ProjectManager"))
 {
   <p>
     @Html.ActionLink("Create", "Create", new { projectId = ViewBag.ProjectId })
@@ -76,7 +76,7 @@
         }
       </td>
       <td>
-        @Html.ActionLink("Update", "Edit", new { taskId = item.Id })
+        @Html.ActionLink("Update", "Edit", new { taskId = item.Id }) | 
         @Html.ActionLink("Notes", "List", "Notes", new { id = item.Id }, null)
       </td>
     </tr>

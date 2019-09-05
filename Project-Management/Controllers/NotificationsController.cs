@@ -19,12 +19,16 @@ namespace Project_Management.Controllers
     {
       var notifications = notificationManagement.GetNotifications(db.Users.Find(User.Identity.GetUserId()));
       notificationManagement.MarkNotificationRead(notifications);
+      ViewBag.Head = "UnRead ";
+      ViewBag.Count = notifications.Count;
       return View(notifications);
     }
     public ActionResult OpenedList()
     {
       var notifications = notificationManagement.GetAllNotifications(db.Users.Find(User.Identity.GetUserId()));
       notificationManagement.MarkNotificationRead(notifications);
+      ViewBag.Head = "All ";
+      ViewBag.Count = notifications.Count;
       return View("List", notifications);
     }
   }
