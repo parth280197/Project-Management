@@ -197,10 +197,26 @@ namespace Project_Management.Helpers
       {
         //get all task with difference between tommorow date and deadline is 1 or lessthen 1.
         DateTime tommorowDate = DateTime.Now.AddDays(1);
-        notificationTasks = user.Tasks.Where(t => (tommorowDate.Day - t.Deadline.Day) <= 1).ToList();
+        foreach (var t in user.Tasks.ToList())
+        {
+          var td = t.Deadline.Day - tommorowDate.Day;
+        }
+        notificationTasks = user.Tasks.Where(t => (t.Deadline.Day - tommorowDate.Day) <= 1).ToList();
       }
 
       notificationManagement.AddNotification(notificationTasks, userId, NotificationType.Incompleted);
+      return true;
+    }
+    public bool DeleteTask(int taskId)
+    {
+      var task = db.Tasks.Find(taskId);
+
+      db.Notes.RemoveRange(task.Notes);
+      db.Tasks.Remove(task);
+
+      var notificationsToRemove = db.Notifications.Where(n => n.Task.Id == task.Id).ToList();
+      db.Notifications.RemoveRange(notificationsToRemove);
+      db.SaveChanges();
       return true;
     }
 

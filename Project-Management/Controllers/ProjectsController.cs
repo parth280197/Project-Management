@@ -56,9 +56,10 @@ namespace Project_Management.Controllers
       return View("ProjectForm", project);
     }
 
-    [Authorize(Roles = "ProjectManager,Developer")]
+
     #endregion
     #region Delete actions
+    [Authorize(Roles = "ProjectManager")]
     public ActionResult Delete(int projectId)
     {
       projectManagement.DeleteProject(projectId);

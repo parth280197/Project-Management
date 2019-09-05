@@ -76,8 +76,12 @@
         }
       </td>
       <td>
-        @Html.ActionLink("Update", "Edit", new { taskId = item.Id }) | 
-        @Html.ActionLink("Notes", "List", "Notes", new { id = item.Id }, null)
+        @Html.ActionLink("Update", "Edit", new { taskId = item.Id }) |
+        @Html.ActionLink("Notes", "List", "Notes", new { id = item.Id }, null) |
+        @if (User.IsInRole("ProjectManager"))
+        {
+          @Html.ActionLink("Delete", "Delete", new { taskId = item.Id })
+        }
       </td>
     </tr>
   }

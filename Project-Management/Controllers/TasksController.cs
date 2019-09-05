@@ -94,5 +94,11 @@ namespace Project_Management.Controllers
       tasksManagement.DevUpdateTask(devTaskViewModel, User.Identity.GetUserId());
       return RedirectToAction("List", new { projectId = devTaskViewModel.ProjectId });
     }
+    [Authorize(Roles = "ProjectManager")]
+    public ActionResult Delete(int taskId)
+    {
+      tasksManagement.DeleteTask(taskId);
+      return RedirectToAction("List", "Projects");
+    }
   }
 }
