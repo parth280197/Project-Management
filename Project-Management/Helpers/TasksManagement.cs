@@ -171,6 +171,7 @@ namespace Project_Management.Helpers
       };
       taskInDb.Notes.Add(note);
       db.SaveChanges();
+      projectManagement.UpdateCompletedWork(taskInDb.Project);
       if (devTaskViewModel.CompletedPercentage == 100)
       {
         notificationManagement.AddCompletedNotification(taskInDb, NotificationType.Completed);
@@ -197,10 +198,6 @@ namespace Project_Management.Helpers
       {
         //get all task with difference between tommorow date and deadline is 1 or lessthen 1.
         DateTime tommorowDate = DateTime.Now.AddDays(1);
-        foreach (var t in user.Tasks.ToList())
-        {
-          var td = t.Deadline.Day - tommorowDate.Day;
-        }
         notificationTasks = user.Tasks.Where(t => (t.Deadline.Day - tommorowDate.Day) <= 1).ToList();
       }
 
