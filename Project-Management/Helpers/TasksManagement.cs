@@ -32,7 +32,7 @@ namespace Project_Management.Helpers
       }
       return userTasks.ToList();
     }
-    public bool CreateTask(UserTaskFormViewModel userTaskFormView)
+    public void CreateTask(UserTaskFormViewModel userTaskFormView)
     {
       var task = userTaskFormView.Task;
       task.Project = db.Projects.Find(task.ProjectId);
@@ -48,11 +48,9 @@ namespace Project_Management.Helpers
           db.SaveChanges();
         }
         projectManagement.UpdateCompletedWork(task.Project);
-        return true;
       }
-      return false;
     }
-    public bool UpdateTask(UserTaskFormViewModel userTaskFormView)
+    public void UpdateTask(UserTaskFormViewModel userTaskFormView)
     {
       var task = userTaskFormView.Task;
       task.Project = db.Projects.Find(task.ProjectId);
@@ -112,9 +110,7 @@ namespace Project_Management.Helpers
           //if task completed add notification
           notificationManagement.AddCompletedNotification(taskInDb, NotificationType.Completed);
         }
-        return true;
       }
-      return false;
     }
     public UserTaskFormViewModel LoadViewModel(int taskId)
     {
@@ -159,7 +155,7 @@ namespace Project_Management.Helpers
       return devTaskViewModel;
     }
 
-    public bool DevUpdateTask(DevTaskViewModel devTaskViewModel, string userId)
+    public void DevUpdateTask(DevTaskViewModel devTaskViewModel, string userId)
     {
       var taskInDb = db.Tasks.Find(devTaskViewModel.Id);
       taskInDb.CompletedPercentage = devTaskViewModel.CompletedPercentage;
@@ -176,15 +172,13 @@ namespace Project_Management.Helpers
       {
         notificationManagement.AddCompletedNotification(taskInDb, NotificationType.Completed);
       }
-
-      return false;
     }
     public UserTask GetUserTask(int taskId)
     {
       var task = db.Tasks.Find(taskId);
       return task;
     }
-    public bool CheckDeadlines(string userId)
+    public void CheckDeadlines(string userId)
     {
       var user = db.Users.Find(userId);
       var notificationTasks = new List<UserTask>();
@@ -202,9 +196,8 @@ namespace Project_Management.Helpers
       }
 
       notificationManagement.AddNotification(notificationTasks, userId, NotificationType.Incompleted);
-      return true;
     }
-    public bool DeleteTask(int taskId)
+    public void DeleteTask(int taskId)
     {
       var task = db.Tasks.Find(taskId);
 
@@ -214,7 +207,6 @@ namespace Project_Management.Helpers
       var notificationsToRemove = db.Notifications.Where(n => n.Task.Id == task.Id).ToList();
       db.Notifications.RemoveRange(notificationsToRemove);
       db.SaveChanges();
-      return true;
     }
 
   }

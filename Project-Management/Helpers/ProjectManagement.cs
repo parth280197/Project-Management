@@ -23,7 +23,7 @@ namespace Project_Management.Helpers
       }
       return false;
     }
-    public bool UpdateProject(Project project)
+    public void UpdateProject(Project project)
     {
       var projectIndb = db.Projects.Find(project.Id);
       if (projectIndb != null)
@@ -33,9 +33,7 @@ namespace Project_Management.Helpers
         projectIndb.Description = project.Description;
         projectIndb.Deadline = project.Deadline;
         db.SaveChanges();
-        return true;
       }
-      return false;
     }
     public void UpdateCompletedWork(Project project)
     {
@@ -60,7 +58,7 @@ namespace Project_Management.Helpers
       }
       return projects.ToList();
     }
-    public bool DeleteProject(int projectId)
+    public void DeleteProject(int projectId)
     {
       var project = db.Projects.Find(projectId);
       var taskInProject = project.Tasks.ToList();
@@ -74,7 +72,6 @@ namespace Project_Management.Helpers
       }
       db.Projects.Remove(project);
       db.SaveChanges();
-      return true;
     }
   }
 }
