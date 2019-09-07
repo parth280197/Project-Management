@@ -12,12 +12,25 @@ namespace Project_Management.Helpers
     {
       this.db = db;
     }
+
+    #region Get methods
+    /// <summary>
+    /// Gives all unopened notification for specific user.
+    /// </summary>
+    /// <param name="user">To get all unopened notification of the user</param>
+    /// <returns>List of all unopend notification</returns>
     public List<Notification> GetNotifications(User user)
     {
       var notifications = db.Notifications.Where(n => n.User.Id == user.Id && !n.IsOpened).ToList();
 
       return notifications;
     }
+
+    /// <summary>
+    /// Gives all notification for specific user.
+    /// </summary>
+    /// <param name="user">To get all notification of the user</param>
+    /// <returns>List of all notification</returns>
     public List<Notification> GetAllNotifications(User user)
     {
       var notifications = db.Notifications.Where(n => n.User.Id == user.Id).ToList();
@@ -27,15 +40,16 @@ namespace Project_Management.Helpers
       }
       return notifications;
     }
+    #endregion
 
-    public void MarkNotificationRead(List<Notification> notifications)
-    {
-      foreach (var notification in notifications)
-      {
-        notification.IsOpened = true;
-        db.SaveChanges();
-      }
-    }
+    #region Create methods
+
+    /// <summary>
+    /// Add pending notification for perticular task in database.
+    /// </summary>
+    /// <param name="tasks">To add taskId in notification from Task.</param>
+    /// <param name="userId">To add userId in notification from Task.</param>
+    /// <param name="notificationType">Specifies type of notification.</param>
     public void AddNotification(List<UserTask> tasks, string userId, NotificationType notificationType)
     {
       foreach (var task in tasks)
@@ -69,6 +83,11 @@ namespace Project_Management.Helpers
       }
     }
 
+    /// <summary>
+    /// Add completed notification for perticular task in database.
+    /// </summary>
+    /// <param name="task">To add taskId in notification from Task.</param>
+    /// <param name="notificationType">Specifies type of notification.</param>
     public void AddCompletedNotification(UserTask task, NotificationType notificationType)
     {
       var projectManagers = db.Users.Where(u => u.PersonType == PersonType.ProjectManager).ToList();
@@ -102,5 +121,21 @@ namespace Project_Management.Helpers
         }
       }
     }
+    #endregion
+
+    #region Update method
+    /// <summary>
+    /// Mark notification as read in database.
+    /// </summary>
+    /// <param name="notifications">List of notification to be marked as read or opened.</param>
+    public void MarkNotificationRead(List<Notification> notifications)
+    {
+      foreach (var notification in notifications)
+      {
+        notification.IsOpened = true;
+        db.SaveChanges();
+      }
+    }
+    #endregion
   }
 }

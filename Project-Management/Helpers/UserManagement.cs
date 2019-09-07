@@ -13,10 +13,23 @@ namespace Project_Management.Helpers
       this.db = db;
       userManager = new UserManager<User>(new UserStore<User>(db));
     }
-    public bool AddUserToRole(string UserId, string RoleName)
+
+    /// <summary>
+    /// This function assign the Role to the provided user.
+    /// </summary>
+    /// <param name="userId">UserId for user.</param>
+    /// <param name="roleName">RoleName to assign user to that rule.</param>
+    /// <returns></returns>
+    public bool AddUserToRole(string userId, string roleName)
     {
-      return userManager.AddToRole(UserId, RoleName).Succeeded;
+      return userManager.AddToRole(userId, roleName).Succeeded;
     }
+    /// <summary>
+    /// Check whether User exist in a provided role name or not
+    /// </summary>
+    /// <param name="userId">UserId for user.</param>
+    /// <param name="roleName">RoleName to check whether user is in role or not.</param>
+    /// <returns>true if User assigned to that perticular role.</returns>
     public bool UserInRole(string userId, string roleName)
     {
       return userManager.IsInRole(userId, roleName);

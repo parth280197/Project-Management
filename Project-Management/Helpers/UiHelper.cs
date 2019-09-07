@@ -2,6 +2,11 @@
 {
   public static class UiHelper
   {
+    /// <summary>
+    /// ClasSelector select the appropriate bootstrap class for progrees bar based on input number
+    /// </summary>
+    /// <param name="number">value of progress bar</param>
+    /// <returns>Bootstrap class for progrees bar as string</returns>
     public static string ClassSelector(double number)
     {
       if (number <= 10)
