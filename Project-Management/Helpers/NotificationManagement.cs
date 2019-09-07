@@ -54,7 +54,7 @@ namespace Project_Management.Helpers
           var user = db.Users.Find(userId);
           Notification notification = new Notification()
           {
-            Detail = task.Name + "is pending complete it before" + task.Deadline,
+            Detail = task.Name + "is pending complete it before" + task.Deadline.ToString("d MMM yyyy"),
             IsOpened = false,
             Task = task,
             Project = task.Project,
