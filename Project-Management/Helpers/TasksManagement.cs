@@ -200,13 +200,18 @@ namespace Project_Management.Helpers
     public void DeleteTask(int taskId)
     {
       var task = db.Tasks.Find(taskId);
+      var project = task.Project;
 
       db.Notes.RemoveRange(task.Notes);
-      db.Tasks.Remove(task);
 
       var notificationsToRemove = db.Notifications.Where(n => n.Task.Id == task.Id).ToList();
       db.Notifications.RemoveRange(notificationsToRemove);
+
+      db.Tasks.Remove(task);
+
       db.SaveChanges();
+
+      projectManagement.UpdateCompletedWork(project);
     }
 
   }
