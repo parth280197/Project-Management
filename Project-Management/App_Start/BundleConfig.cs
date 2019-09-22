@@ -22,7 +22,7 @@ namespace Project_Management
                 "~/Scripts/bootstrap.js"));
 
       bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.css",
+                "~/Content/bootstrap.min.css",
                 "~/Content/site.css"));
       //jqueryUI
       bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
@@ -30,6 +30,12 @@ namespace Project_Management
       //css  
       bundles.Add(new StyleBundle("~/Content/cssjqryUi").Include(
              "~/Content/themes/base/jquery-ui.css"));
+      //choosen
+      bundles.Add(new StyleBundle("~/Content/choosen").Include(
+             "~/Content/choosen/chosen.min.css"));
+
+      bundles.Add(new ScriptBundle("~/bundles/choosen").Include(
+          "~/Scripts/chosen.jquery.min.js"));
     }
   }
 }

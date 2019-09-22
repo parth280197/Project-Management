@@ -1,50 +1,49 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@ViewBag.Title - My ASP.NET Application</title>
+  @Styles.Render("~/Content/css")
+  @Styles.Render("~/Content/choosen")
+  @Scripts.Render("~/bundles/modernizr")
+  @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Project-Manager", "List", "Projects", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-              @if (User.Identity.IsAuthenticated)
-              {
-              <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Projects", "List", "Projects")</li>
-                <li>@Html.ActionLink("Notification", "List", "Notifications")</li>
-                @if (User.IsInRole("ProjectManager"))
-                {
-                  <li>@Html.ActionLink("Incomplete-Task", "ListIncompleteTask", "Tasks")</li>
-                }
-              </ul>
-              }
-              @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    @Html.ActionLink("Project-Manager", "List", "Projects", new { area = "" }, new { @class = "navbar-brand" })
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      @if (User.Identity.IsAuthenticated)
+      {
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">@Html.ActionLink("Projects", "List", "Projects", new { @class = "nav-link" })</li>
+          <li class="nav-item">@Html.ActionLink("Notification", "List", "Notifications", new { @class = "nav-link" })</li>
+          @if (User.IsInRole("ProjectManager"))
+          {
+            <li class="nav-item">@Html.ActionLink("Incomplete-Task", "ListIncompleteTask", "Tasks", new { @class = "nav-link" })</li>
+          }
+        </ul>
+      }
+      @Html.Partial("_LoginPartial")
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+  </nav>
+  <div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer>
+      <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+  </div>
+
+  
+  @Scripts.Render("~/bundles/choosen")
+  @Scripts.Render("~/bundles/bootstrap")
+  @RenderSection("scripts", required: false)
 </body>
 </html>
