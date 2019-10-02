@@ -15,9 +15,9 @@
 
   ![Full screen](./login.png)
 
-2. Register
+2. Registration
 
-  ![Full screen](./Register.png)
+  ![Full screen](./Registration.png)
   
 3. Create project
 
